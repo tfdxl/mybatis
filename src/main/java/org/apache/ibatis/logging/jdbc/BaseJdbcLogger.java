@@ -103,7 +103,7 @@ public abstract class BaseJdbcLogger {
     }
 
     protected String getParameterValueString() {
-        List<Object> typeList = new ArrayList<Object>(columnValues.size());
+        List<Object> typeList = new ArrayList<>(columnValues.size());
         for (Object value : columnValues) {
             if (value == null) {
                 typeList.add("null");
