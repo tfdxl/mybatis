@@ -16,10 +16,9 @@
 package org.apache.ibatis.submitted.column_prefix;
 
 public class Zip {
+
   private String state;
-
   private String city;
-
   private int zipCode;
 
   public String getState() {

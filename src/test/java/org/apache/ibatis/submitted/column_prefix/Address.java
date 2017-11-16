@@ -1,104 +1,98 @@
 /**
- *    Copyright 2009-2015 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2015 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.submitted.column_prefix;
 
 public class Address {
-  private Integer id;
 
-  private String state;
+    private Integer id;
+    private String state;
+    private String city;
+    private Phone phone1;
+    private Phone phone2;
+    private boolean hasPhone;
+    private String stateBird;
+    private Zip zip;
 
-  private String city;
+    public Address(Integer id, String state) {
+        super();
+        this.id = id;
+        this.state = state;
+    }
 
-  private Phone phone1;
+    public Integer getId() {
+        return id;
+    }
 
-  private Phone phone2;
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-  private boolean hasPhone;
+    public String getState() {
+        return state;
+    }
 
-  private String stateBird;
+    public void setState(String state) {
+        this.state = state;
+    }
 
-  private Zip zip;
+    public String getCity() {
+        return city;
+    }
 
-  public Address(Integer id, String state) {
-    super();
-    this.id = id;
-    this.state = state;
-  }
+    public void setCity(String city) {
+        this.city = city;
+    }
 
-  public Integer getId() {
-    return id;
-  }
+    public Phone getPhone1() {
+        return phone1;
+    }
 
-  public void setId(Integer id) {
-    this.id = id;
-  }
+    public void setPhone1(Phone phone1) {
+        this.phone1 = phone1;
+    }
 
-  public String getState() {
-    return state;
-  }
+    public Phone getPhone2() {
+        return phone2;
+    }
 
-  public void setState(String state) {
-    this.state = state;
-  }
+    public void setPhone2(Phone phone2) {
+        this.phone2 = phone2;
+    }
 
-  public String getCity() {
-    return city;
-  }
+    public boolean isHasPhone() {
+        return hasPhone;
+    }
 
-  public void setCity(String city) {
-    this.city = city;
-  }
+    public void setHasPhone(boolean hasPhone) {
+        this.hasPhone = hasPhone;
+    }
 
-  public Phone getPhone1() {
-    return phone1;
-  }
+    public String getStateBird() {
+        return stateBird;
+    }
 
-  public void setPhone1(Phone phone1) {
-    this.phone1 = phone1;
-  }
+    public void setStateBird(String stateBird) {
+        this.stateBird = stateBird;
+    }
 
-  public Phone getPhone2() {
-    return phone2;
-  }
+    public Zip getZip() {
+        return zip;
+    }
 
-  public void setPhone2(Phone phone2) {
-    this.phone2 = phone2;
-  }
-
-  public boolean isHasPhone() {
-    return hasPhone;
-  }
-
-  public void setHasPhone(boolean hasPhone) {
-    this.hasPhone = hasPhone;
-  }
-
-  public String getStateBird() {
-    return stateBird;
-  }
-
-  public void setStateBird(String stateBird) {
-    this.stateBird = stateBird;
-  }
-
-  public Zip getZip() {
-    return zip;
-  }
-
-  public void setZip(Zip zip) {
-    this.zip = zip;
-  }
+    public void setZip(Zip zip) {
+        this.zip = zip;
+    }
 }
