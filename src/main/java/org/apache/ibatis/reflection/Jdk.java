@@ -20,6 +20,7 @@ import org.apache.ibatis.io.Resources;
 
 /**
  * To check the existence of version dependent classes.
+ *
  * @author tianfeng
  */
 public class Jdk {
@@ -35,7 +36,7 @@ public class Jdk {
             Resources.classForName("java.lang.reflect.Parameter");
             available = true;
         } catch (ClassNotFoundException e) {
-
+            System.err.println("ClassNotFoundException");
         }
         parameterExists = available;
     }
@@ -48,12 +49,18 @@ public class Jdk {
             Resources.classForName("java.time.Clock");
             available = true;
         } catch (ClassNotFoundException e) {
-
+            System.err.println("ClassNotFoundException");
         }
         dateAndTimeApiExists = available;
     }
 
     private Jdk() {
         super();
+    }
+
+    public static void main(String[] args) {
+        Class clazz = Jdk.class;
+        System.err.println("parameterExists " + parameterExists);
+        System.err.println("dateAndTimeApiExists " + dateAndTimeApiExists);
     }
 }

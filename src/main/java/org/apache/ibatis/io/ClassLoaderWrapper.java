@@ -118,7 +118,6 @@ public class ClassLoaderWrapper {
                 if (null == returnValue) {
                     returnValue = cl.getResourceAsStream("/" + resource);
                 }
-
                 if (null != returnValue) {
                     return returnValue;
                 }
@@ -199,5 +198,4 @@ public class ClassLoaderWrapper {
                 getClass().getClassLoader(),
                 systemClassLoader};
     }
-
 }

@@ -194,7 +194,7 @@ public class Reflector {
     }
 
     private void addSetMethods(Class<?> cls) {
-        Map<String, List<Method>> conflictingSetters = new HashMap<String, List<Method>>();
+        Map<String, List<Method>> conflictingSetters = new HashMap<>(64);
         Method[] methods = getClassMethods(cls);
         for (Method method : methods) {
             String name = method.getName();
@@ -211,7 +211,7 @@ public class Reflector {
     private void addMethodConflict(Map<String, List<Method>> conflictingMethods, String name, Method method) {
         List<Method> list = conflictingMethods.get(name);
         if (list == null) {
-            list = new ArrayList<Method>();
+            list = new ArrayList<>();
             conflictingMethods.put(name, list);
         }
         list.add(method);
@@ -284,7 +284,7 @@ public class Reflector {
                 result = Array.newInstance((Class<?>) componentType, 0).getClass();
             } else {
                 Class<?> componentClass = typeToClass(componentType);
-                result = Array.newInstance((Class<?>) componentClass, 0).getClass();
+                result = Array.newInstance(componentClass, 0).getClass();
             }
         }
         if (result == null) {
@@ -342,6 +342,10 @@ public class Reflector {
         }
     }
 
+    /**
+     * @param name
+     * @return
+     */
     private boolean isValidPropertyName(String name) {
         return !(name.startsWith("$") || "serialVersionUID".equals(name) || "class".equals(name));
     }
@@ -367,12 +371,10 @@ public class Reflector {
             for (Class<?> anInterface : interfaces) {
                 addUniqueMethods(uniqueMethods, anInterface.getMethods());
             }
-
             currentClass = currentClass.getSuperclass();
         }
 
         Collection<Method> methods = uniqueMethods.values();
-
         return methods.toArray(new Method[methods.size()]);
     }
 
@@ -391,7 +393,6 @@ public class Reflector {
                             // Ignored. This is only a final precaution, nothing we can do.
                         }
                     }
-
                     uniqueMethods.put(signature, currentMethod);
                 }
             }
@@ -399,8 +400,8 @@ public class Reflector {
     }
 
     private String getSignature(Method method) {
-        StringBuilder sb = new StringBuilder();
-        Class<?> returnType = method.getReturnType();
+        final StringBuilder sb = new StringBuilder();
+        final Class<?> returnType = method.getReturnType();
         if (returnType != null) {
             sb.append(returnType.getName()).append('#');
         }
