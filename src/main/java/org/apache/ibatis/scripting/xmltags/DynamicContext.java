@@ -85,15 +85,14 @@ public class DynamicContext {
 
         @Override
         public Object get(Object key) {
-            String strKey = (String) key;
+
+            final String strKey = (String) key;
             if (super.containsKey(strKey)) {
                 return super.get(strKey);
             }
-
             if (parameterMetaObject != null) {
                 return parameterMetaObject.getValue(strKey);
             }
-
             return null;
         }
     }
@@ -103,25 +102,23 @@ public class DynamicContext {
         @Override
         public Object getProperty(Map context, Object target, Object name)
                 throws OgnlException {
-            Map map = (Map) target;
 
-            Object result = map.get(name);
+            final Map map = (Map) target;
+            final Object result = map.get(name);
             if (map.containsKey(name) || result != null) {
                 return result;
             }
-
-            Object parameterObject = map.get(PARAMETER_OBJECT_KEY);
+            final Object parameterObject = map.get(PARAMETER_OBJECT_KEY);
             if (parameterObject instanceof Map) {
                 return ((Map) parameterObject).get(name);
             }
-
             return null;
         }
 
         @Override
         public void setProperty(Map context, Object target, Object name, Object value)
                 throws OgnlException {
-            Map<Object, Object> map = (Map<Object, Object>) target;
+            final Map<Object, Object> map = (Map<Object, Object>) target;
             map.put(name, value);
         }
 
