@@ -129,7 +129,9 @@ public class Configuration {
 
     protected boolean lazyLoadingEnabled = false;
 
-    // #224 Using internal Javassist instead of OGNL
+    /**
+     * #224 Using internal Javassist instead of OGNL
+     */
     protected ProxyFactory proxyFactory = new JavassistProxyFactory();
 
     protected String databaseId;
