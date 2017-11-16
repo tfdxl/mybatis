@@ -47,12 +47,30 @@ import java.util.Map.Entry;
 public class Reflector {
 
     private final Class<?> type;
+
+    /**
+     * 可读属性的名字
+     */
     private final String[] readablePropertyNames;
+
+    /**
+     * 可写属性名字
+     */
     private final String[] writeablePropertyNames;
-    private final Map<String, Invoker> setMethods = new HashMap<String, Invoker>();
-    private final Map<String, Invoker> getMethods = new HashMap<String, Invoker>();
-    private final Map<String, Class<?>> setTypes = new HashMap<String, Class<?>>();
-    private final Map<String, Class<?>> getTypes = new HashMap<String, Class<?>>();
+
+    private final Map<String, Invoker> setMethods = new HashMap<>();
+    private final Map<String, Invoker> getMethods = new HashMap<>();
+    /**
+     * set方法的Class类型
+     */
+    private final Map<String, Class<?>> setTypes = new HashMap<>();
+    /**
+     * get方法的Class类型
+     */
+    private final Map<String, Class<?>> getTypes = new HashMap<>();
+    /**
+     * 默认的无参数构造方法
+     */
     private Constructor<?> defaultConstructor;
 
     private Map<String, String> caseInsensitivePropertyMap = new HashMap<String, String>();
@@ -60,8 +78,11 @@ public class Reflector {
     public Reflector(Class<?> clazz) {
         //设置type
         type = clazz;
+        //添加无参数的构造方法
         addDefaultConstructor(clazz);
+        //添加所有的get方法
         addGetMethods(clazz);
+        //添加所有的set方法
         addSetMethods(clazz);
         addFields(clazz);
         readablePropertyNames = getMethods.keySet().toArray(new String[getMethods.keySet().size()]);
@@ -80,9 +101,14 @@ public class Reflector {
      * @param clazz
      */
     private void addDefaultConstructor(Class<?> clazz) {
+
+        //获取所有的构造方法
         Constructor<?>[] consts = clazz.getDeclaredConstructors();
         for (Constructor<?> constructor : consts) {
+
+            //选中没有参数的
             if (constructor.getParameterTypes().length == 0) {
+
                 if (canAccessPrivateMethods()) {
                     try {
                         constructor.setAccessible(true);
@@ -268,6 +294,7 @@ public class Reflector {
     }
 
     private void addFields(Class<?> clazz) {
+        //获取所有的声明的属性
         Field[] fields = clazz.getDeclaredFields();
         for (Field field : fields) {
             if (canAccessPrivateMethods()) {
@@ -292,6 +319,8 @@ public class Reflector {
                 }
             }
         }
+
+        //继续添加父类的属性
         if (clazz.getSuperclass() != null) {
             addFields(clazz.getSuperclass());
         }
@@ -317,7 +346,7 @@ public class Reflector {
         return !(name.startsWith("$") || "serialVersionUID".equals(name) || "class".equals(name));
     }
 
-    /*
+    /**
      * This method returns an array containing all methods
      * declared in this class and any superclass.
      * We use this method, instead of the simpler Class.getMethods(),
@@ -327,7 +356,7 @@ public class Reflector {
      * @return An array containing all methods in this class
      */
     private Method[] getClassMethods(Class<?> cls) {
-        Map<String, Method> uniqueMethods = new HashMap<String, Method>();
+        Map<String, Method> uniqueMethods = new HashMap<>(64);
         Class<?> currentClass = cls;
         while (currentClass != null) {
             addUniqueMethods(uniqueMethods, currentClass.getDeclaredMethods());
@@ -388,6 +417,11 @@ public class Reflector {
         return sb.toString();
     }
 
+    /**
+     * 检查是否能有权限访问私有的方法
+     *
+     * @return
+     */
     private static boolean canAccessPrivateMethods() {
         try {
             SecurityManager securityManager = System.getSecurityManager();
@@ -400,7 +434,7 @@ public class Reflector {
         return true;
     }
 
-    /*
+    /**
      * Gets the name of the class the instance provides information for
      *
      * @return The class name
