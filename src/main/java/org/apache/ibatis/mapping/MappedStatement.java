@@ -60,6 +60,7 @@ public final class MappedStatement {
     MappedStatement() {}
 
     public static class Builder {
+
         private MappedStatement mappedStatement = new MappedStatement();
 
         public Builder(Configuration configuration, String id, SqlSource sqlSource, SqlCommandType sqlCommandType) {
