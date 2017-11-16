@@ -170,9 +170,15 @@ public class ResultMapping {
         }
 
         private void resolveTypeHandler() {
+
+            //没有设置typeHandler但是设置了JavaType
             if (resultMapping.typeHandler == null && resultMapping.javaType != null) {
+
+                //获取到配置
                 Configuration configuration = resultMapping.configuration;
+                //获取到TypeHandler的注册中心
                 TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+                //通过JavaType和JdbcType获TypeHandler
                 resultMapping.typeHandler = typeHandlerRegistry.getTypeHandler(resultMapping.javaType, resultMapping.jdbcType);
             }
         }

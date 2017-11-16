@@ -83,8 +83,8 @@ public class DefaultResultSetHandler implements ResultSetHandler {
     private final ReflectorFactory reflectorFactory;
 
     // nested resultmaps
-    private final Map<CacheKey, Object> nestedResultObjects = new HashMap<CacheKey, Object>();
-    private final Map<String, Object> ancestorObjects = new HashMap<String, Object>();
+    private final Map<CacheKey, Object> nestedResultObjects = new HashMap<>();
+    private final Map<String, Object> ancestorObjects = new HashMap<>();
     private Object previousRowValue;
 
     // multiple resultsets
