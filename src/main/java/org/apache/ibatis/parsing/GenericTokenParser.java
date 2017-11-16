@@ -49,12 +49,14 @@ public class GenericTokenParser {
                 builder.append(src, offset, start - offset - 1).append(openToken);
                 offset = start + openToken.length();
             } else {
+
                 // found open token. let's search close token.
                 if (expression == null) {
                     expression = new StringBuilder();
                 } else {
                     expression.setLength(0);
                 }
+
                 builder.append(src, offset, start - offset);
                 offset = start + openToken.length();
                 int end = text.indexOf(closeToken, offset);
@@ -66,7 +68,6 @@ public class GenericTokenParser {
                         end = text.indexOf(closeToken, offset);
                     } else {
                         expression.append(src, offset, end - offset);
-                        offset = end + closeToken.length();
                         break;
                     }
                 }
