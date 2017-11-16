@@ -551,7 +551,7 @@ public class PooledDataSource implements DataSource {
         return result;
     }
 
-    /*
+    /**
      * Unwraps a pooled connection to get to the 'real' connection
      *
      * @param conn - the pooled connection to unwrap
@@ -567,21 +567,24 @@ public class PooledDataSource implements DataSource {
         return conn;
     }
 
+    @Override
     protected void finalize() throws Throwable {
         forceCloseAll();
         super.finalize();
     }
 
+    @Override
     public <T> T unwrap(Class<T> iface) throws SQLException {
         throw new SQLException(getClass().getName() + " is not a wrapper.");
     }
 
+    @Override
     public boolean isWrapperFor(Class<?> iface) throws SQLException {
         return false;
     }
 
+    @Override
     public Logger getParentLogger() {
-        return Logger.getLogger(Logger.GLOBAL_LOGGER_NAME); // requires JDK version 1.6
+        return Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     }
-
 }
