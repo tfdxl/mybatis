@@ -103,13 +103,18 @@ public class XMLScriptBuilder extends BaseBuilder {
     }
 
     private interface NodeHandler {
+
+        /**
+         * handleNode
+         *
+         * @param nodeToHandle
+         * @param targetContents
+         */
         void handleNode(XNode nodeToHandle, List<SqlNode> targetContents);
     }
 
     private class BindHandler implements NodeHandler {
-        public BindHandler() {
-            // Prevent Synthetic Access
-        }
+        public BindHandler() {}
 
         @Override
         public void handleNode(XNode nodeToHandle, List<SqlNode> targetContents) {
@@ -150,9 +155,7 @@ public class XMLScriptBuilder extends BaseBuilder {
     }
 
     private class SetHandler implements NodeHandler {
-        public SetHandler() {
-            // Prevent Synthetic Access
-        }
+        public SetHandler() {}
 
         @Override
         public void handleNode(XNode nodeToHandle, List<SqlNode> targetContents) {
@@ -164,9 +167,8 @@ public class XMLScriptBuilder extends BaseBuilder {
     }
 
     private class ForEachHandler implements NodeHandler {
-        public ForEachHandler() {
-            // Prevent Synthetic Access
-        }
+
+        public ForEachHandler() {}
 
         @Override
         public void handleNode(XNode nodeToHandle, List<SqlNode> targetContents) {
@@ -184,9 +186,8 @@ public class XMLScriptBuilder extends BaseBuilder {
     }
 
     private class IfHandler implements NodeHandler {
-        public IfHandler() {
-            // Prevent Synthetic Access
-        }
+
+        public IfHandler() {}
 
         @Override
         public void handleNode(XNode nodeToHandle, List<SqlNode> targetContents) {
@@ -199,9 +200,8 @@ public class XMLScriptBuilder extends BaseBuilder {
     }
 
     private class OtherwiseHandler implements NodeHandler {
-        public OtherwiseHandler() {
-            // Prevent Synthetic Access
-        }
+
+        public OtherwiseHandler() {}
 
         @Override
         public void handleNode(XNode nodeToHandle, List<SqlNode> targetContents) {
@@ -212,9 +212,8 @@ public class XMLScriptBuilder extends BaseBuilder {
     }
 
     private class ChooseHandler implements NodeHandler {
-        public ChooseHandler() {
-            // Prevent Synthetic Access
-        }
+
+        public ChooseHandler() {}
 
         @Override
         public void handleNode(XNode nodeToHandle, List<SqlNode> targetContents) {

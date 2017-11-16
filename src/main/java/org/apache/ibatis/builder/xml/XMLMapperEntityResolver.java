@@ -75,7 +75,6 @@ public class XMLMapperEntityResolver implements EntityResolver {
                 source.setPublicId(publicId);
                 source.setSystemId(systemId);
             } catch (IOException e) {
-
             }
         }
         return source;
