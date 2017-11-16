@@ -342,9 +342,7 @@ public class SqlSessionManager implements SqlSessionFactory, SqlSession {
 
     private class SqlSessionInterceptor implements InvocationHandler {
 
-        public SqlSessionInterceptor() {
-            // Prevent Synthetic Access
-        }
+        public SqlSessionInterceptor() {}
 
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
@@ -372,5 +370,4 @@ public class SqlSessionManager implements SqlSessionFactory, SqlSession {
             }
         }
     }
-
 }

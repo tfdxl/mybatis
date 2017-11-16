@@ -143,5 +143,4 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
             }
         }
     }
-
 }
