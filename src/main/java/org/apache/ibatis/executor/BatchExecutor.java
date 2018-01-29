@@ -114,7 +114,11 @@ public class BatchExecutor extends BaseExecutor {
                 return Collections.emptyList();
             }
             for (int i = 0, n = statementList.size(); i < n; i++) {
-                Statement stmt = statementList.get(i);
+
+                //获取statement
+                final Statement stmt = statementList.get(i);
+
+                //应用事务超时
                 applyTransactionTimeout(stmt);
                 BatchResult batchResult = batchResultList.get(i);
                 try {
