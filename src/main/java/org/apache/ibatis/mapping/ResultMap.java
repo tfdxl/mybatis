@@ -36,8 +36,8 @@ import java.util.Set;
  * @author Clinton Begin
  */
 public class ResultMap {
-    private Configuration configuration;
 
+    private Configuration configuration;
     private String id;
     private Class<?> type;
     private List<ResultMapping> resultMappings;
