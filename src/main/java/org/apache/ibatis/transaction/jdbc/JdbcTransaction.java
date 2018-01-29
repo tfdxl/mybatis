@@ -38,11 +38,23 @@ public class JdbcTransaction implements Transaction {
 
     private static final Log log = LogFactory.getLog(JdbcTransaction.class);
 
-    protected Connection connection;
-    protected DataSource dataSource;
-    protected TransactionIsolationLevel level;
     /**
-     * MEMO: We are aware of the typo. See #941
+     * 数据库连接
+     */
+    protected Connection connection;
+
+    /**
+     * 数据源
+     */
+    protected DataSource dataSource;
+
+    /**
+     * 事务隔离级别
+     */
+    protected TransactionIsolationLevel level;
+
+    /**
+     * 是否自动提交
      */
     protected boolean autoCommmit;
 
@@ -145,8 +157,7 @@ public class JdbcTransaction implements Transaction {
     }
 
     @Override
-    public Integer getTimeout() throws SQLException {
+    public Integer getTimeout() {
         return null;
     }
-
 }
