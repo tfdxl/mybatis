@@ -298,7 +298,7 @@ public class XMLConfigBuilder extends BaseBuilder {
         DatabaseIdProvider databaseIdProvider = null;
         if (context != null) {
             String type = context.getStringAttribute("type");
-            // awful patch to keep backward compatibility
+            // 烂补丁保持向后兼容
             if ("VENDOR".equals(type)) {
                 type = "DB_VENDOR";
             }
@@ -335,11 +335,11 @@ public class XMLConfigBuilder extends BaseBuilder {
         throw new BuilderException("Environment declaration requires a DataSourceFactory.");
     }
 
-    private void typeHandlerElement(XNode parent) throws Exception {
+    private void typeHandlerElement(XNode parent) {
         if (parent != null) {
             for (XNode child : parent.getChildren()) {
                 if ("package".equals(child.getName())) {
-                    String typeHandlerPackage = child.getStringAttribute("name");
+                    final String typeHandlerPackage = child.getStringAttribute("name");
                     typeHandlerRegistry.register(typeHandlerPackage);
                 } else {
                     String javaTypeName = child.getStringAttribute("javaType");
@@ -366,7 +366,7 @@ public class XMLConfigBuilder extends BaseBuilder {
         if (parent != null) {
             for (XNode child : parent.getChildren()) {
                 if ("package".equals(child.getName())) {
-                    String mapperPackage = child.getStringAttribute("name");
+                    final String mapperPackage = child.getStringAttribute("name");
                     configuration.addMappers(mapperPackage);
                 } else {
                     final String resource = child.getStringAttribute("resource");
