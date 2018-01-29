@@ -109,7 +109,7 @@ public class BatchExecutor extends BaseExecutor {
     @Override
     public List<BatchResult> doFlushStatements(boolean isRollback) throws SQLException {
         try {
-            List<BatchResult> results = new ArrayList<BatchResult>();
+            final List<BatchResult> results = new ArrayList<BatchResult>();
             if (isRollback) {
                 return Collections.emptyList();
             }

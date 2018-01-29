@@ -26,18 +26,18 @@ import java.util.List;
 public class BatchResult {
 
     private final MappedStatement mappedStatement;
-
     private final String sql;
-
     private final List<Object> parameterObjects;
-
+    /**
+     * 影响的数目
+     */
     private int[] updateCounts;
 
     public BatchResult(MappedStatement mappedStatement, String sql) {
         super();
         this.mappedStatement = mappedStatement;
         this.sql = sql;
-        this.parameterObjects = new ArrayList<Object>();
+        this.parameterObjects = new ArrayList<>();
     }
 
     public BatchResult(MappedStatement mappedStatement, String sql, Object parameterObject) {
