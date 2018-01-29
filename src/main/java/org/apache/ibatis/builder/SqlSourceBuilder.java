@@ -110,7 +110,6 @@ public class SqlSourceBuilder extends BaseBuilder {
                 } else if ("jdbcTypeName".equals(name)) {
                     builder.jdbcTypeName(value);
                 } else if ("property".equals(name)) {
-                    // Do Nothing
                 } else if ("expression".equals(name)) {
                     throw new BuilderException("Expression based parameters are not supported yet");
                 } else {
@@ -133,5 +132,4 @@ public class SqlSourceBuilder extends BaseBuilder {
             }
         }
     }
-
 }
