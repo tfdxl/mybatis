@@ -56,9 +56,13 @@ public class ParamNameResolver {
 
     public ParamNameResolver(Configuration config, Method method) {
 
+        //获取参数的类型
         final Class<?>[] paramTypes = method.getParameterTypes();
+        //获取所有的注解
         final Annotation[][] paramAnnotations = method.getParameterAnnotations();
+        //带顺序的map
         final SortedMap<Integer, String> map = new TreeMap<>();
+        //参数注解的个数
         int paramCount = paramAnnotations.length;
 
         //获取@Param注解的名字
@@ -136,6 +140,23 @@ public class ParamNameResolver {
                 i++;
             }
             return param;
+        }
+    }
+
+    static class Name {
+
+        public void insert(@Param("name") String name) {
+
+        }
+    }
+
+    public static void main(String[] args) throws NoSuchMethodException {
+        final Class[] classes = {String.class};
+        final Method method = Name.class.getMethod("insert", classes);
+        final ParamNameResolver paramNameResolver = new ParamNameResolver(new Configuration(), method);
+        final String[] names = paramNameResolver.getNames();
+        for (String s : names) {
+            System.err.println(s);
         }
     }
 }
