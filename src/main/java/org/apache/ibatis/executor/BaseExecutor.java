@@ -51,9 +51,19 @@ public abstract class BaseExecutor implements Executor {
 
     private static final Log log = LogFactory.getLog(BaseExecutor.class);
 
+    /**
+     * Executor对应的事务
+     */
     protected Transaction transaction;
+
+    /**
+     * 被包装的执行器
+     */
     protected Executor wrapper;
 
+    /**
+     * 延迟加载队列
+     */
     protected ConcurrentLinkedQueue<DeferredLoad> deferredLoads;
     protected PerpetualCache localCache;
     protected PerpetualCache localOutputParameterCache;
@@ -267,15 +277,53 @@ public abstract class BaseExecutor implements Executor {
         }
     }
 
+    /**
+     * 钩子函数给子类去实现更新
+     *
+     * @param ms
+     * @param parameter
+     * @return
+     * @throws SQLException
+     */
     protected abstract int doUpdate(MappedStatement ms, Object parameter)
             throws SQLException;
 
+    /**
+     * 钩子函数给子类去实现刷新statement
+     *
+     * @param isRollback
+     * @return
+     * @throws SQLException
+     */
     protected abstract List<BatchResult> doFlushStatements(boolean isRollback)
             throws SQLException;
 
+    /**
+     * 钩子函数给子类去实现查询
+     *
+     * @param ms
+     * @param parameter
+     * @param rowBounds
+     * @param resultHandler
+     * @param boundSql
+     * @param <E>
+     * @return
+     * @throws SQLException
+     */
     protected abstract <E> List<E> doQuery(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql)
             throws SQLException;
 
+    /**
+     * 钩子函数给子类去实现查询
+     *
+     * @param ms
+     * @param parameter
+     * @param rowBounds
+     * @param boundSql
+     * @param <E>
+     * @return
+     * @throws SQLException
+     */
     protected abstract <E> Cursor<E> doQueryCursor(MappedStatement ms, Object parameter, RowBounds rowBounds, BoundSql boundSql)
             throws SQLException;
 
@@ -286,19 +334,10 @@ public abstract class BaseExecutor implements Executor {
                     statement.close();
                 }
             } catch (SQLException e) {
-                // ignore
             }
         }
     }
 
-    /**
-     * Apply a transaction timeout.
-     *
-     * @param statement a current statement
-     * @throws SQLException if a database access error occurs, this method is called on a closed <code>Statement</code>
-     * @see StatementUtil#applyTransactionTimeout(Statement, Integer, Integer)
-     * @since 3.4.0
-     */
     protected void applyTransactionTimeout(Statement statement) throws SQLException {
         StatementUtil.applyTransactionTimeout(statement, statement.getQueryTimeout(), transaction.getTimeout());
     }
@@ -379,9 +418,7 @@ public abstract class BaseExecutor implements Executor {
         }
 
         public void load() {
-            @SuppressWarnings("unchecked")
-            // we suppose we get back a List
-                    List<Object> list = (List<Object>) localCache.getObject(key);
+            List<Object> list = (List<Object>) localCache.getObject(key);
             Object value = resultExtractor.extractObjectFromList(list, targetType);
             resultObject.setValue(property, value);
         }

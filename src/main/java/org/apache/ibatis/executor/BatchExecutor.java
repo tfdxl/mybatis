@@ -118,7 +118,7 @@ public class BatchExecutor extends BaseExecutor {
                 //获取statement
                 final Statement stmt = statementList.get(i);
 
-                //应用事务超时
+                //应用事务超时时间
                 applyTransactionTimeout(stmt);
                 BatchResult batchResult = batchResultList.get(i);
                 try {
