@@ -86,6 +86,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     }
 
     /**
+     * public abstract static
      * Backport of java.lang.reflect.Method#isDefault()
      */
     private boolean isDefaultMethod(Method method) {

@@ -98,7 +98,7 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
             final Executor executor = configuration.newExecutor(tx, execType);
             return new DefaultSqlSession(configuration, executor, autoCommit);
         } catch (Exception e) {
-            closeTransaction(tx); // may have fetched a connection so lets call close()
+            closeTransaction(tx);
             throw ExceptionFactory.wrapException("Error opening session.  Cause: " + e, e);
         } finally {
             ErrorContext.instance().reset();
@@ -111,8 +111,6 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
             try {
                 autoCommit = connection.getAutoCommit();
             } catch (SQLException e) {
-                // Failover to true, as most poor drivers
-                // or databases won't support transactions
                 autoCommit = true;
             }
             final Environment environment = configuration.getEnvironment();
@@ -139,7 +137,6 @@ public class DefaultSqlSessionFactory implements SqlSessionFactory {
             try {
                 tx.close();
             } catch (SQLException ignore) {
-                // Intentionally ignore. Prefer previous error.
             }
         }
     }

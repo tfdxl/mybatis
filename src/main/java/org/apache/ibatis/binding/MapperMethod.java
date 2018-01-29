@@ -269,6 +269,10 @@ public class MapperMethod {
         private final boolean returnsMap;
         private final boolean returnsVoid;
         private final boolean returnsCursor;
+
+        /**
+         * 返回的类型
+         */
         private final Class<?> returnType;
         private final String mapKey;
         private final Integer resultHandlerIndex;
