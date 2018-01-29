@@ -26,8 +26,11 @@ public class XPathParserTest {
 
     @Test
     public void shouldTestXPathParserMethods() throws Exception {
+
         final String resource = "resources/nodelet_test.xml";
         final InputStream inputStream = Resources.getResourceAsStream(resource);
+
+        //xpath查找器
         final XPathParser parser = new XPathParser(inputStream, false, null, null);
 
         assertEquals((Long) 1970L, parser.evalLong("/employee/birth_date/year"));
@@ -42,8 +45,9 @@ public class XPathParserTest {
 
         final XNode node = parser.evalNode("/employee/height");
 
+        System.err.println(node.getName());
         assertEquals("employee/height", node.getPath());
-
+        System.err.println(node.getPath());
         assertEquals("employee[${id_var}]_height", node.getValueBasedIdentifier());
 
         inputStream.close();
