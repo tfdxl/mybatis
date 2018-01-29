@@ -146,7 +146,7 @@ public class ParamNameResolver {
     static class Name {
 
         public void insert(@Param("name") String name) {
-
+            System.err.println(name);
         }
     }
 
@@ -155,7 +155,7 @@ public class ParamNameResolver {
         final Method method = Name.class.getMethod("insert", classes);
         final ParamNameResolver paramNameResolver = new ParamNameResolver(new Configuration(), method);
         final String[] names = paramNameResolver.getNames();
-        for (String s : names) {
+        for (final String s : names) {
             System.err.println(s);
         }
     }
