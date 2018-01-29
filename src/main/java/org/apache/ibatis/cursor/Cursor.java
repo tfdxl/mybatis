@@ -27,11 +27,15 @@ import java.io.Closeable;
 public interface Cursor<T> extends Closeable, Iterable<T> {
 
     /**
+     * true if the cursor has started to fetch items from database
+     *
      * @return true if the cursor has started to fetch items from database.
      */
     boolean isOpen();
 
     /**
+     * true if the cursor is fully consumed and has returned all elements matching the query.
+     *
      * @return true if the cursor is fully consumed and has returned all elements matching the query.
      */
     boolean isConsumed();
