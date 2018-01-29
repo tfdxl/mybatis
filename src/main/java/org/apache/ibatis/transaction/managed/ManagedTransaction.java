@@ -62,13 +62,11 @@ public class ManagedTransaction implements Transaction {
     }
 
     @Override
-    public void commit() throws SQLException {
-        // Does nothing
+    public void commit() {
     }
 
     @Override
-    public void rollback() throws SQLException {
-        // Does nothing
+    public void rollback() {
     }
 
     @Override
@@ -92,7 +90,7 @@ public class ManagedTransaction implements Transaction {
     }
 
     @Override
-    public Integer getTimeout() throws SQLException {
+    public Integer getTimeout() {
         return null;
     }
 
