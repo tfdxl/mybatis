@@ -361,7 +361,6 @@ public class MapperAnnotationBuilder {
                     resultSetType,
                     flushCache,
                     useCache,
-                    // TODO gcode issue #577
                     false,
                     keyGenerator,
                     keyProperty,
