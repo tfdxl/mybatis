@@ -30,6 +30,8 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 
 /**
+ * 参数的名字解析
+ *
  * @author tianfeng
  */
 public class ParamNameResolver {
@@ -37,7 +39,6 @@ public class ParamNameResolver {
     private static final String GENERIC_NAME_PREFIX = "param";
 
     /**
-     * <p>
      * The key is the index and the value is the name of the parameter.<br />
      * The name is obtained from {@link Param} if specified. When {@link Param} is not specified,
      * the parameter index is used. Note that this index could be different from the actual index
@@ -54,14 +55,16 @@ public class ParamNameResolver {
     private boolean hasParamAnnotation;
 
     public ParamNameResolver(Configuration config, Method method) {
+
         final Class<?>[] paramTypes = method.getParameterTypes();
         final Annotation[][] paramAnnotations = method.getParameterAnnotations();
-        final SortedMap<Integer, String> map = new TreeMap<Integer, String>();
+        final SortedMap<Integer, String> map = new TreeMap<>();
         int paramCount = paramAnnotations.length;
-        // get names from @Param annotations
+
+        //获取@Param注解的名字
         for (int paramIndex = 0; paramIndex < paramCount; paramIndex++) {
             if (isSpecialParameter(paramTypes[paramIndex])) {
-                // skip special parameters
+                // 跳过特殊的参数
                 continue;
             }
             String name = null;
@@ -73,13 +76,10 @@ public class ParamNameResolver {
                 }
             }
             if (name == null) {
-                // @Param was not specified.
                 if (config.isUseActualParamName()) {
                     name = getActualParamName(method, paramIndex);
                 }
                 if (name == null) {
-                    // use the parameter index as the name ("0", "1", ...)
-                    // gcode issue #71
                     name = String.valueOf(map.size());
                 }
             }
@@ -117,12 +117,13 @@ public class ParamNameResolver {
     public Object getNamedParams(Object[] args) {
 
         final int paramCount = names.size();
+
         if (args == null || paramCount == 0) {
             return null;
         } else if (!hasParamAnnotation && paramCount == 1) {
             return args[names.firstKey()];
         } else {
-            final Map<String, Object> param = new ParamMap<Object>();
+            final Map<String, Object> param = new ParamMap<>();
             int i = 0;
             for (Map.Entry<Integer, String> entry : names.entrySet()) {
                 param.put(entry.getValue(), args[entry.getKey()]);
