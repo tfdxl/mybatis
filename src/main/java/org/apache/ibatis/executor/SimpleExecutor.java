@@ -68,9 +68,9 @@ public class SimpleExecutor extends BaseExecutor {
 
     @Override
     protected <E> Cursor<E> doQueryCursor(MappedStatement ms, Object parameter, RowBounds rowBounds, BoundSql boundSql) throws SQLException {
-        Configuration configuration = ms.getConfiguration();
-        StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, null, boundSql);
-        Statement stmt = prepareStatement(handler, ms.getStatementLog());
+        final Configuration configuration = ms.getConfiguration();
+        final StatementHandler handler = configuration.newStatementHandler(wrapper, ms, parameter, rowBounds, null, boundSql);
+        final Statement stmt = prepareStatement(handler, ms.getStatementLog());
         return handler.queryCursor(stmt);
     }
 
@@ -81,7 +81,7 @@ public class SimpleExecutor extends BaseExecutor {
 
     private Statement prepareStatement(StatementHandler handler, Log statementLog) throws SQLException {
         Statement stmt;
-        Connection connection = getConnection(statementLog);
+        final Connection connection = getConnection(statementLog);
         stmt = handler.prepare(connection, transaction.getTimeout());
         handler.parameterize(stmt);
         return stmt;
