@@ -22,17 +22,53 @@ package org.apache.ibatis.logging;
  */
 public interface Log {
 
+    /**
+     * 开启debug了吗
+     *
+     * @return
+     */
     boolean isDebugEnabled();
 
+    /**
+     * 开启trace了吗
+     *
+     * @return
+     */
     boolean isTraceEnabled();
 
+    /**
+     * 错误日志
+     *
+     * @param s
+     * @param e
+     */
     void error(String s, Throwable e);
 
+    /**
+     * 错误日志
+     *
+     * @param s
+     */
     void error(String s);
 
+    /**
+     * debug日志
+     *
+     * @param s
+     */
     void debug(String s);
 
+    /**
+     * 跟踪日志
+     *
+     * @param s
+     */
     void trace(String s);
 
+    /**
+     * 警告日志
+     *
+     * @param s
+     */
     void warn(String s);
 }

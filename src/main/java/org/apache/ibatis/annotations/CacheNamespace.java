@@ -32,6 +32,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface CacheNamespace {
+
     Class<? extends org.apache.ibatis.cache.Cache> implementation() default PerpetualCache.class;
 
     Class<? extends org.apache.ibatis.cache.Cache> eviction() default LruCache.class;

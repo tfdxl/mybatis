@@ -98,16 +98,40 @@ public class Configuration {
 
     protected Environment environment;
 
+    /**
+     * 安全的行数限制
+     */
     protected boolean safeRowBoundsEnabled;
+    /**
+     * 安全的结果集处理
+     */
     protected boolean safeResultHandlerEnabled = true;
+    /**
+     * 下划线映射到驼峰
+     */
     protected boolean mapUnderscoreToCamelCase;
+    /**
+     * 激进的懒加载
+     */
     protected boolean aggressiveLazyLoading;
+    /**
+     * 多结果集
+     */
     protected boolean multipleResultSetsEnabled = true;
+
     protected boolean useGeneratedKeys;
+
     protected boolean useColumnLabel = true;
+
+    /**
+     * 是否使用缓存
+     */
     protected boolean cacheEnabled = true;
+
     protected boolean callSettersOnNulls;
+
     protected boolean useActualParamName = true;
+
     protected boolean returnInstanceForEmptyRow;
 
     protected String logPrefix;

@@ -27,6 +27,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({})
 public @interface Case {
+
     String value();
 
     Class<?> type();

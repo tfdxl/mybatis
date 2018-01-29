@@ -19,7 +19,7 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 /**
- * References a generic type.
+ * 引用一个泛型的类型
  *
  * @param <T> the referenced type
  * @author Simone Tripodi
@@ -36,7 +36,7 @@ public abstract class TypeReference<T> {
     Type getSuperclassTypeParameter(Class<?> clazz) {
         Type genericSuperclass = clazz.getGenericSuperclass();
         if (genericSuperclass instanceof Class) {
-            // try to climb up the hierarchy until meet something useful
+
             if (TypeReference.class != genericSuperclass) {
                 return getSuperclassTypeParameter(clazz.getSuperclass());
             }
@@ -49,7 +49,6 @@ public abstract class TypeReference<T> {
         if (rawType instanceof ParameterizedType) {
             rawType = ((ParameterizedType) rawType).getRawType();
         }
-
         return rawType;
     }
 
