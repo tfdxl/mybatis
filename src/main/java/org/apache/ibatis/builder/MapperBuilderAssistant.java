@@ -57,7 +57,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
     private String currentNamespace;
     private final String resource;
     private Cache currentCache;
-    private boolean unresolvedCacheRef; // issue #676
+    private boolean unresolvedCacheRef;
 
     public MapperBuilderAssistant(Configuration configuration, String resource) {
         super(configuration);
@@ -128,7 +128,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
                              boolean readWrite,
                              boolean blocking,
                              Properties props) {
-        Cache cache = new CacheBuilder(currentNamespace)
+        final Cache cache = new CacheBuilder(currentNamespace)
                 .implementation(valueOrDefault(typeClass, PerpetualCache.class))
                 .addDecorator(valueOrDefault(evictionClass, LruCache.class))
                 .clearInterval(flushInterval)
