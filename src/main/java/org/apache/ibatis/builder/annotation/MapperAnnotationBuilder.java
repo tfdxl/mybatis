@@ -102,6 +102,7 @@ public class MapperAnnotationBuilder {
     private final Class<?> type;
 
     public MapperAnnotationBuilder(Configuration configuration, Class<?> type) {
+
         final String resource = type.getName().replace('.', '/') + ".java (best guess)";
         this.assistant = new MapperBuilderAssistant(configuration, resource);
         this.configuration = configuration;
@@ -167,7 +168,7 @@ public class MapperAnnotationBuilder {
             }
 
             if (inputStream != null) {
-                XMLMapperBuilder xmlParser = new XMLMapperBuilder(inputStream, assistant.getConfiguration(), xmlResource, configuration.getSqlFragments(), type.getName());
+                final XMLMapperBuilder xmlParser = new XMLMapperBuilder(inputStream, assistant.getConfiguration(), xmlResource, configuration.getSqlFragments(), type.getName());
                 xmlParser.parse();
             }
         }
