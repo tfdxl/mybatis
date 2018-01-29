@@ -33,7 +33,6 @@ public enum AutoMappingUnknownColumnBehavior {
     NONE {
         @Override
         public void doAction(MappedStatement mappedStatement, String columnName, String property, Class<?> propertyType) {
-            // do nothing
         }
     },
 

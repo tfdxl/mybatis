@@ -336,6 +336,12 @@ public class DefaultSqlSession implements SqlSession {
 
         private static final long serialVersionUID = -5741767162221585340L;
 
+        /**
+         * 没有抛异常
+         *
+         * @param key
+         * @return
+         */
         @Override
         public V get(Object key) {
             if (!super.containsKey(key)) {
