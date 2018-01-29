@@ -25,6 +25,12 @@ class ByteArrayUtils {
      */
     private ByteArrayUtils() {}
 
+    /**
+     * 转成原始类型数组
+     *
+     * @param objects
+     * @return
+     */
     static byte[] convertToPrimitiveArray(Byte[] objects) {
         final byte[] bytes = new byte[objects.length];
         for (int i = 0; i < objects.length; i++) {
@@ -39,5 +45,13 @@ class ByteArrayUtils {
             objects[i] = bytes[i];
         }
         return objects;
+    }
+
+    public static void main(String[] args) {
+        Byte[] o = {34, 45};
+        final byte[] bytes = convertToPrimitiveArray(o);
+        for (byte b : bytes) {
+            System.err.println(b);
+        }
     }
 }

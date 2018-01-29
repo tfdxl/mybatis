@@ -35,11 +35,15 @@ public class OgnlClassResolver implements ClassResolver {
 
     @Override
     public Class classForName(String className, Map context) throws ClassNotFoundException {
+
         Class<?> result;
+
+        //先从缓存终找
         if ((result = classes.get(className)) == null) {
             try {
                 result = Resources.classForName(className);
             } catch (ClassNotFoundException e1) {
+                //没有包的类
                 if (className.indexOf('.') == -1) {
                     result = Resources.classForName("java.lang." + className);
                     classes.put("java.lang." + className, result);
