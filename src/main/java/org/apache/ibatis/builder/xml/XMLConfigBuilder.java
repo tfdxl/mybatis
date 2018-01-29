@@ -369,21 +369,21 @@ public class XMLConfigBuilder extends BaseBuilder {
                     String mapperPackage = child.getStringAttribute("name");
                     configuration.addMappers(mapperPackage);
                 } else {
-                    String resource = child.getStringAttribute("resource");
-                    String url = child.getStringAttribute("url");
-                    String mapperClass = child.getStringAttribute("class");
+                    final String resource = child.getStringAttribute("resource");
+                    final String url = child.getStringAttribute("url");
+                    final String mapperClass = child.getStringAttribute("class");
                     if (resource != null && url == null && mapperClass == null) {
                         ErrorContext.instance().resource(resource);
-                        InputStream inputStream = Resources.getResourceAsStream(resource);
-                        XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, resource, configuration.getSqlFragments());
+                        final InputStream inputStream = Resources.getResourceAsStream(resource);
+                        final XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, resource, configuration.getSqlFragments());
                         mapperParser.parse();
                     } else if (resource == null && url != null && mapperClass == null) {
                         ErrorContext.instance().resource(url);
-                        InputStream inputStream = Resources.getUrlAsStream(url);
-                        XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, url, configuration.getSqlFragments());
+                        final InputStream inputStream = Resources.getUrlAsStream(url);
+                        final XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, url, configuration.getSqlFragments());
                         mapperParser.parse();
                     } else if (resource == null && url == null && mapperClass != null) {
-                        Class<?> mapperInterface = Resources.classForName(mapperClass);
+                        final Class<?> mapperInterface = Resources.classForName(mapperClass);
                         configuration.addMapper(mapperInterface);
                     } else {
                         throw new BuilderException("A mapper element may only specify a url, resource or class, but not more than one.");
