@@ -42,8 +42,8 @@ public class BatchExecutor extends BaseExecutor {
 
     public static final int BATCH_UPDATE_RETURN_VALUE = Integer.MIN_VALUE + 1002;
 
-    private final List<Statement> statementList = new ArrayList<Statement>();
-    private final List<BatchResult> batchResultList = new ArrayList<BatchResult>();
+    private final List<Statement> statementList = new ArrayList<>();
+    private final List<BatchResult> batchResultList = new ArrayList<>();
     private String currentSql;
     private MappedStatement currentStatement;
 
@@ -62,19 +62,18 @@ public class BatchExecutor extends BaseExecutor {
             int last = statementList.size() - 1;
             stmt = statementList.get(last);
             applyTransactionTimeout(stmt);
-            handler.parameterize(stmt);//fix Issues 322
+            handler.parameterize(stmt);
             BatchResult batchResult = batchResultList.get(last);
             batchResult.addParameterObject(parameterObject);
         } else {
             Connection connection = getConnection(ms.getStatementLog());
             stmt = handler.prepare(connection, transaction.getTimeout());
-            handler.parameterize(stmt);    //fix Issues 322
+            handler.parameterize(stmt);
             currentSql = sql;
             currentStatement = ms;
             statementList.add(stmt);
             batchResultList.add(new BatchResult(ms, sql, parameterObject));
         }
-        // handler.parameterize(stmt);
         handler.batch(stmt);
         return BATCH_UPDATE_RETURN_VALUE;
     }
@@ -90,7 +89,7 @@ public class BatchExecutor extends BaseExecutor {
             Connection connection = getConnection(ms.getStatementLog());
             stmt = handler.prepare(connection, transaction.getTimeout());
             handler.parameterize(stmt);
-            return handler.<E>query(stmt, resultHandler);
+            return handler.query(stmt, resultHandler);
         } finally {
             closeStatement(stmt);
         }
@@ -104,7 +103,7 @@ public class BatchExecutor extends BaseExecutor {
         Connection connection = getConnection(ms.getStatementLog());
         Statement stmt = handler.prepare(connection, transaction.getTimeout());
         handler.parameterize(stmt);
-        return handler.<E>queryCursor(stmt);
+        return handler.queryCursor(stmt);
     }
 
     @Override
@@ -126,7 +125,7 @@ public class BatchExecutor extends BaseExecutor {
                     if (Jdbc3KeyGenerator.class.equals(keyGenerator.getClass())) {
                         Jdbc3KeyGenerator jdbc3KeyGenerator = (Jdbc3KeyGenerator) keyGenerator;
                         jdbc3KeyGenerator.processBatch(ms, stmt, parameterObjects);
-                    } else if (!NoKeyGenerator.class.equals(keyGenerator.getClass())) { //issue #141
+                    } else if (!NoKeyGenerator.class.equals(keyGenerator.getClass())) {
                         for (Object parameter : parameterObjects) {
                             keyGenerator.processAfter(this, ms, stmt, parameter);
                         }
