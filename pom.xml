@@ -194,6 +194,12 @@
       <version>3.2.5</version>
       <optional>true</optional>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.mchange/c3p0 -->
+    <dependency>
+      <groupId>com.mchange</groupId>
+      <artifactId>c3p0</artifactId>
+      <version>0.9.5.2</version>
+    </dependency>
 
     <!-- Test dependencies -->
     <dependency>
