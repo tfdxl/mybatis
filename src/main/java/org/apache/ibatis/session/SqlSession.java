@@ -198,7 +198,7 @@ public interface SqlSession extends Closeable {
      *
      * @param statement Unique identifier matching the statement to execute.
      * @param parameter A parameter object to pass to the statement.
-     * @return int The number of rows affected by the insert.
+     * @return int 插入的行数 The number of rows affected by the insert.
      */
     int insert(String statement, Object parameter);
 
