@@ -16,6 +16,8 @@
 package org.apache.ibatis.mapping;
 
 /**
+ * 入参，出参，输入均用
+ *
  * @author Clinton Begin
  */
 public enum ParameterMode {
