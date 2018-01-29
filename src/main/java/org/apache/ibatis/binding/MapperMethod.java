@@ -211,13 +211,16 @@ public class MapperMethod {
 
     public static class SqlCommand {
 
+        /**
+         * 命令的名字,其实就是statement的ID
+         */
         private final String name;
         private final SqlCommandType type;
 
         public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
             final String methodName = method.getName();
             final Class<?> declaringClass = method.getDeclaringClass();
-            MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass,
+            final MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass,
                     configuration);
             if (ms == null) {
                 if (method.getAnnotation(Flush.class) != null) {
