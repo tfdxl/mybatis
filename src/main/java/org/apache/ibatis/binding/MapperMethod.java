@@ -290,10 +290,15 @@ public class MapperMethod {
             } else {
                 this.returnType = method.getReturnType();
             }
+            //返回空
             this.returnsVoid = void.class.equals(this.returnType);
+            //返回多个
             this.returnsMany = configuration.getObjectFactory().isCollection(this.returnType) || this.returnType.isArray();
+            //返回的是Cursor对象
             this.returnsCursor = Cursor.class.equals(this.returnType);
+            //映射的key
             this.mapKey = getMapKey(method);
+            //返回的是map
             this.returnsMap = this.mapKey != null;
             this.rowBoundsIndex = getUniqueParamIndex(method, RowBounds.class);
             this.resultHandlerIndex = getUniqueParamIndex(method, ResultHandler.class);

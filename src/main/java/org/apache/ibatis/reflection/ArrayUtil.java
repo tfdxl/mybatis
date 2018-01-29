@@ -34,15 +34,18 @@ public class ArrayUtil {
      * @return A hash code of {@code obj} or 0 if {@code obj} is <code>null</code>
      */
     public static int hashCode(Object obj) {
+
         if (obj == null) {
-            // for consistency with Arrays#hashCode() and Objects#hashCode()
             return 0;
         }
+
         final Class<?> clazz = obj.getClass();
         if (!clazz.isArray()) {
             return obj.hashCode();
         }
+
         final Class<?> componentType = clazz.getComponentType();
+
         if (long.class.equals(componentType)) {
             return Arrays.hashCode((long[]) obj);
         } else if (int.class.equals(componentType)) {
