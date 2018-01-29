@@ -54,6 +54,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     }
 
     public void parseStatementNode() {
+
         String id = context.getStringAttribute("id");
         String databaseId = context.getStringAttribute("databaseId");
 
@@ -198,5 +199,4 @@ public class XMLStatementBuilder extends BaseBuilder {
         }
         return builderAssistant.getLanguageDriver(langClass);
     }
-
 }
