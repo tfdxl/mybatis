@@ -291,7 +291,14 @@ public final class MappedStatement {
         return resultSets;
     }
 
+    /**
+     * 获取SQL
+     *
+     * @param parameterObject
+     * @return
+     */
     public BoundSql getBoundSql(Object parameterObject) {
+
         BoundSql boundSql = sqlSource.getBoundSql(parameterObject);
         List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
         if (parameterMappings == null || parameterMappings.isEmpty()) {
