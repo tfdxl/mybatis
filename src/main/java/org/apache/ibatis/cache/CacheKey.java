@@ -35,13 +35,9 @@ public class CacheKey implements Cloneable, Serializable {
     private static final int DEFAULT_HASHCODE = 17;
 
     private final int multiplier;
-
     private int hashcode;
-
     private long checksum;
-
     private int count;
-
     private List<Object> updateList;
 
     public CacheKey() {
@@ -61,19 +57,17 @@ public class CacheKey implements Cloneable, Serializable {
     }
 
     public void update(Object object) {
-        int baseHashCode = object == null ? 1 : ArrayUtil.hashCode(object);
 
+        int baseHashCode = object == null ? 1 : ArrayUtil.hashCode(object);
         count++;
         checksum += baseHashCode;
         baseHashCode *= count;
-
         hashcode = multiplier * hashcode + baseHashCode;
-
         updateList.add(object);
     }
 
     public void updateAll(Object[] objects) {
-        for (Object o : objects) {
+        for (final Object o : objects) {
             update(o);
         }
     }
@@ -116,17 +110,17 @@ public class CacheKey implements Cloneable, Serializable {
 
     @Override
     public String toString() {
-        StringBuilder returnValue = new StringBuilder().append(hashcode).append(':').append(checksum);
-        for (Object object : updateList) {
-            returnValue.append(':').append(ArrayUtil.toString(object));
+        final StringBuilder ret = new StringBuilder().append(hashcode).append(':').append(checksum);
+        for (final Object object : updateList) {
+            ret.append(':').append(ArrayUtil.toString(object));
         }
-        return returnValue.toString();
+        return ret.toString();
     }
 
     @Override
     public CacheKey clone() throws CloneNotSupportedException {
         CacheKey clonedCacheKey = (CacheKey) super.clone();
-        clonedCacheKey.updateList = new ArrayList<Object>(updateList);
+        clonedCacheKey.updateList = new ArrayList<>(updateList);
         return clonedCacheKey;
     }
 }
