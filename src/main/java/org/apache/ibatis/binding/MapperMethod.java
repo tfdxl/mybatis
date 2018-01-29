@@ -98,6 +98,8 @@ public class MapperMethod {
 
     private Object rowCountResult(int rowCount) {
         final Object result;
+
+        //方法本来就没有返回值
         if (method.returnsVoid()) {
             result = null;
         } else if (Integer.class.equals(method.getReturnType()) || Integer.TYPE.equals(method.getReturnType())) {

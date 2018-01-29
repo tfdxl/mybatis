@@ -113,5 +113,4 @@ public class DefaultObjectFactory implements ObjectFactory, Serializable {
     public <T> boolean isCollection(Class<T> type) {
         return Collection.class.isAssignableFrom(type);
     }
-
 }
