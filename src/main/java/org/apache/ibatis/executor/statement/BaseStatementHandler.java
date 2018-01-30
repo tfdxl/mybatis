@@ -51,6 +51,7 @@ public abstract class BaseStatementHandler implements StatementHandler {
     protected BoundSql boundSql;
 
     protected BaseStatementHandler(Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+
         this.configuration = mappedStatement.getConfiguration();
         this.executor = executor;
         this.mappedStatement = mappedStatement;
@@ -59,7 +60,6 @@ public abstract class BaseStatementHandler implements StatementHandler {
         this.typeHandlerRegistry = configuration.getTypeHandlerRegistry();
         this.objectFactory = configuration.getObjectFactory();
 
-        // issue #435, get the key before calculating the statement
         if (boundSql == null) {
             generateKeys(parameterObject);
             boundSql = mappedStatement.getBoundSql(parameterObject);
@@ -143,7 +143,7 @@ public abstract class BaseStatementHandler implements StatementHandler {
     }
 
     protected void generateKeys(Object parameter) {
-        KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
+        final KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
         ErrorContext.instance().store();
         keyGenerator.processBefore(executor, mappedStatement, null, parameter);
         ErrorContext.instance().recall();

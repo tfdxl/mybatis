@@ -46,8 +46,7 @@ public class SimpleExecutor extends BaseExecutor {
         try {
             //获取配置
             final Configuration configuration = ms.getConfiguration();
-
-            //获取statement的处理器，不需要结果处理器和函数限制
+            //获取statement的处理器，不需要结果处理器和行数的限制
             final StatementHandler handler = configuration.newStatementHandler(this, ms, parameter, RowBounds.DEFAULT, null, null);
             stmt = prepareStatement(handler, ms.getStatementLog());
             return handler.update(stmt);

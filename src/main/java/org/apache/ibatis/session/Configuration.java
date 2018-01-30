@@ -157,12 +157,37 @@ public class Configuration {
      * 若设置值为 STATEMENT，本地会话仅用在语句执行上，对相同 SqlSession 的不同调用将不会共享数据
      */
     protected LocalCacheScope localCacheScope = LocalCacheScope.SESSION;
+
+    /**
+     * 当没有为参数提供特定的 JDBC 类型时，为空值指定 JDBC 类型。
+     * 某些驱动需要指定列的 JDBC 类型，多数情况直接用一般类型即可，比如 NULL、VARCHAR 或 OTHER
+     */
     protected JdbcType jdbcTypeForNull = JdbcType.OTHER;
+
+    /**
+     * 指定哪个对象的方法触发一次延迟加载
+     */
     protected Set<String> lazyLoadTriggerMethods = new HashSet<String>(Arrays.asList(new String[]{"equals", "clone", "hashCode", "toString"}));
+
+    /**
+     * 设置超时时间，它决定驱动等待数据库响应的秒数
+     */
     protected Integer defaultStatementTimeout;
+
     protected Integer defaultFetchSize;
+
+    /**
+     * 配置默认的执行器。SIMPLE 就是普通的执行器；
+     * REUSE 执行器会重用预处理语句（prepared statements）； BATCH 执行器将重用语句并执行批量更新
+     */
     protected ExecutorType defaultExecutorType = ExecutorType.SIMPLE;
+
+    /**
+     * 指定 MyBatis 应如何自动映射列到字段或属性。 NONE 表示取消自动映射；
+     * PARTIAL 只会自动映射没有定义嵌套结果集映射的结果集。 FULL 会自动映射任意复杂的结果集（无论是否嵌套
+     */
     protected AutoMappingBehavior autoMappingBehavior = AutoMappingBehavior.PARTIAL;
+
     protected AutoMappingUnknownColumnBehavior autoMappingUnknownColumnBehavior = AutoMappingUnknownColumnBehavior.NONE;
 
     protected Properties variables = new Properties();
@@ -199,8 +224,14 @@ public class Configuration {
     protected final TypeAliasRegistry typeAliasRegistry = new TypeAliasRegistry();
     protected final LanguageDriverRegistry languageRegistry = new LanguageDriverRegistry();
 
-    //statementId ---> MappedStatement
+    /**
+     * statementId ---> MappedStatement映射
+     */
     protected final Map<String, MappedStatement> mappedStatements = new StrictMap<>("Mapped Statements collection");
+
+    /**
+     * 所有的cache的类型
+     */
     protected final Map<String, Cache> caches = new StrictMap<>("Caches collection");
     protected final Map<String, ResultMap> resultMaps = new StrictMap<>("Result Maps collection");
     protected final Map<String, ParameterMap> parameterMaps = new StrictMap<>("Parameter Maps collection");
@@ -627,9 +658,18 @@ public class Configuration {
         return newExecutor(transaction, defaultExecutorType);
     }
 
+    /**
+     * 创建sql执行器
+     *
+     * @param transaction
+     * @param executorType
+     * @return
+     */
     public Executor newExecutor(Transaction transaction, ExecutorType executorType) {
+
         executorType = executorType == null ? defaultExecutorType : executorType;
         executorType = executorType == null ? ExecutorType.SIMPLE : executorType;
+
         Executor executor;
         if (ExecutorType.BATCH == executorType) {
             executor = new BatchExecutor(this, transaction);
