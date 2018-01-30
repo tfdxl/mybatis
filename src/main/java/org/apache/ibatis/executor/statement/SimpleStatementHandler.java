@@ -42,9 +42,9 @@ public class SimpleStatementHandler extends BaseStatementHandler {
 
     @Override
     public int update(Statement statement) throws SQLException {
-        String sql = boundSql.getSql();
-        Object parameterObject = boundSql.getParameterObject();
-        KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
+        final String sql = boundSql.getSql();
+        final Object parameterObject = boundSql.getParameterObject();
+        final KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
         int rows;
         if (keyGenerator instanceof Jdbc3KeyGenerator) {
             statement.execute(sql, Statement.RETURN_GENERATED_KEYS);
@@ -71,14 +71,14 @@ public class SimpleStatementHandler extends BaseStatementHandler {
     public <E> List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException {
         String sql = boundSql.getSql();
         statement.execute(sql);
-        return resultSetHandler.<E>handleResultSets(statement);
+        return resultSetHandler.handleResultSets(statement);
     }
 
     @Override
     public <E> Cursor<E> queryCursor(Statement statement) throws SQLException {
         String sql = boundSql.getSql();
         statement.execute(sql);
-        return resultSetHandler.<E>handleCursorResultSets(statement);
+        return resultSetHandler.handleCursorResultSets(statement);
     }
 
     @Override
@@ -91,8 +91,6 @@ public class SimpleStatementHandler extends BaseStatementHandler {
     }
 
     @Override
-    public void parameterize(Statement statement) throws SQLException {
-        // N/A
+    public void parameterize(Statement statement) {
     }
-
 }

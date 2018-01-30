@@ -42,11 +42,15 @@ public class PreparedStatementHandler extends BaseStatementHandler {
 
     @Override
     public int update(Statement statement) throws SQLException {
-        PreparedStatement ps = (PreparedStatement) statement;
+
+        //获取预处理Statement
+        final PreparedStatement ps = (PreparedStatement) statement;
+
+        //执行
         ps.execute();
-        int rows = ps.getUpdateCount();
-        Object parameterObject = boundSql.getParameterObject();
-        KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
+        final int rows = ps.getUpdateCount();
+        final Object parameterObject = boundSql.getParameterObject();
+        final KeyGenerator keyGenerator = mappedStatement.getKeyGenerator();
         keyGenerator.processAfter(executor, mappedStatement, ps, parameterObject);
         return rows;
     }
@@ -59,23 +63,25 @@ public class PreparedStatementHandler extends BaseStatementHandler {
 
     @Override
     public <E> List<E> query(Statement statement, ResultHandler resultHandler) throws SQLException {
-        PreparedStatement ps = (PreparedStatement) statement;
+
+        //执行
+        final PreparedStatement ps = (PreparedStatement) statement;
         ps.execute();
-        return resultSetHandler.<E>handleResultSets(ps);
+        return resultSetHandler.handleResultSets(ps);
     }
 
     @Override
     public <E> Cursor<E> queryCursor(Statement statement) throws SQLException {
         PreparedStatement ps = (PreparedStatement) statement;
         ps.execute();
-        return resultSetHandler.<E>handleCursorResultSets(ps);
+        return resultSetHandler.handleCursorResultSets(ps);
     }
 
     @Override
     protected Statement instantiateStatement(Connection connection) throws SQLException {
-        String sql = boundSql.getSql();
+        final String sql = boundSql.getSql();
         if (mappedStatement.getKeyGenerator() instanceof Jdbc3KeyGenerator) {
-            String[] keyColumnNames = mappedStatement.getKeyColumns();
+            final String[] keyColumnNames = mappedStatement.getKeyColumns();
             if (keyColumnNames == null) {
                 return connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
             } else {
