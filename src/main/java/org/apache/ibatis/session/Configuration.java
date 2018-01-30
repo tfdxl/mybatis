@@ -113,21 +113,31 @@ public class Configuration {
      * 下划线映射到驼峰
      */
     protected boolean mapUnderscoreToCamelCase;
+
     /**
      * 激进的懒加载
      */
     protected boolean aggressiveLazyLoading;
+
     /**
      * 多结果集
      */
     protected boolean multipleResultSetsEnabled = true;
 
+    /**
+     * 允许 JDBC 支持自动生成主键，需要驱动兼容。
+     * 如果设置为 true 则这个设置强制使用自动生成主键，尽管一些驱动不能兼容但仍可正常工作（比如 Derby）
+     */
     protected boolean useGeneratedKeys;
 
+    /**
+     * 使用列标签代替列名。不同的驱动在这方面会有不同的表现，
+     * 具体可参考相关驱动文档或通过测试这两种不同的模式来观察所用驱动的结果
+     */
     protected boolean useColumnLabel = true;
 
     /**
-     * 是否使用缓存
+     * 该配置影响的所有映射器中配置的缓存的全局开关。默认值true
      */
     protected boolean cacheEnabled = true;
 
@@ -140,6 +150,12 @@ public class Configuration {
     protected String logPrefix;
     protected Class<? extends Log> logImpl;
     protected Class<? extends VFS> vfsImpl;
+
+    /**
+     * MyBatis 利用本地缓存机制（Local Cache）防止循环引用（circular references）和加速重复嵌套查询。
+     * 默认值为 SESSION，这种情况下会缓存一个会话中执行的所有查询。
+     * 若设置值为 STATEMENT，本地会话仅用在语句执行上，对相同 SqlSession 的不同调用将不会共享数据
+     */
     protected LocalCacheScope localCacheScope = LocalCacheScope.SESSION;
     protected JdbcType jdbcTypeForNull = JdbcType.OTHER;
     protected Set<String> lazyLoadTriggerMethods = new HashSet<String>(Arrays.asList(new String[]{"equals", "clone", "hashCode", "toString"}));
@@ -154,6 +170,10 @@ public class Configuration {
     protected ObjectFactory objectFactory = new DefaultObjectFactory();
     protected ObjectWrapperFactory objectWrapperFactory = new DefaultObjectWrapperFactory();
 
+    /**
+     * 延迟加载的全局开关。当开启时，所有关联对象都会延迟加载。
+     * 特定关联关系中可通过设置fetchType属性来覆盖该项的开关状态
+     */
     protected boolean lazyLoadingEnabled = false;
 
     /**
@@ -161,6 +181,9 @@ public class Configuration {
      */
     protected ProxyFactory proxyFactory = new JavassistProxyFactory();
 
+    /**
+     * 选择的databaseId
+     */
     protected String databaseId;
     /**
      * Configuration factory class.
