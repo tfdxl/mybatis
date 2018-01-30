@@ -96,6 +96,9 @@ import java.util.Set;
  */
 public class Configuration {
 
+    /**
+     * 依赖的环境
+     */
     protected Environment environment;
 
     /**
