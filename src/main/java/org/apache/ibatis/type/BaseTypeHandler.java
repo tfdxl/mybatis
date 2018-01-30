@@ -126,6 +126,8 @@ public abstract class BaseTypeHandler<T> extends TypeReference<T> implements Typ
     public abstract T getNullableResult(ResultSet rs, String columnName) throws SQLException;
 
     /**
+     * 返回可空参数
+     *
      * @param rs
      * @param columnIndex
      * @return
@@ -133,6 +135,13 @@ public abstract class BaseTypeHandler<T> extends TypeReference<T> implements Typ
      */
     public abstract T getNullableResult(ResultSet rs, int columnIndex) throws SQLException;
 
+    /**
+     * 返回可空参数
+     *
+     * @param cs
+     * @param columnIndex
+     * @return
+     * @throws SQLException
+     */
     public abstract T getNullableResult(CallableStatement cs, int columnIndex) throws SQLException;
-
 }
