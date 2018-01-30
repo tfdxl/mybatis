@@ -101,14 +101,11 @@ public class TypeAliasRegistry {
         registerAlias("ResultSet", ResultSet.class);
     }
 
-    @SuppressWarnings("unchecked")
-    // throws class cast exception as well if types cannot be assigned
     public <T> Class<T> resolveAlias(String string) {
         try {
             if (string == null) {
                 return null;
             }
-            // issue #748
             String key = string.toLowerCase(Locale.ENGLISH);
             Class<T> value;
             if (TYPE_ALIASES.containsKey(key)) {
@@ -131,8 +128,6 @@ public class TypeAliasRegistry {
         resolverUtil.find(new ResolverUtil.IsA(superType), packageName);
         Set<Class<? extends Class<?>>> typeSet = resolverUtil.getClasses();
         for (Class<?> type : typeSet) {
-            // Ignore inner classes and interfaces (including package-info.java)
-            // Skip also inner classes. See issue #6
             if (!type.isAnonymousClass() && !type.isInterface() && !type.isMemberClass()) {
                 registerAlias(type);
             }
@@ -153,7 +148,6 @@ public class TypeAliasRegistry {
         if (alias == null) {
             throw new TypeException("The parameter alias cannot be null");
         }
-        //convert to lower case
         String key = alias.toLowerCase(Locale.ENGLISH);
         if (TYPE_ALIASES.containsKey(key) && TYPE_ALIASES.get(key) != null && !TYPE_ALIASES.get(key).equals(value)) {
             throw new TypeException("The alias '" + alias + "' is already mapped to the value '" + TYPE_ALIASES.get(key).getName() + "'.");
