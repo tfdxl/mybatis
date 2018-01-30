@@ -142,8 +142,8 @@ public abstract class BaseExecutor implements Executor {
 
     @Override
     public <E> List<E> query(MappedStatement ms, Object parameter, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException {
-        BoundSql boundSql = ms.getBoundSql(parameter);
-        CacheKey key = createCacheKey(ms, parameter, rowBounds, boundSql);
+        final BoundSql boundSql = ms.getBoundSql(parameter);
+        final CacheKey key = createCacheKey(ms, parameter, rowBounds, boundSql);
         return query(ms, parameter, rowBounds, resultHandler, key, boundSql);
     }
 
@@ -202,18 +202,29 @@ public abstract class BaseExecutor implements Executor {
         }
     }
 
+    /**
+     * 创建缓存的key
+     *
+     * @param ms
+     * @param parameterObject
+     * @param rowBounds
+     * @param boundSql
+     * @return
+     */
     @Override
     public CacheKey createCacheKey(MappedStatement ms, Object parameterObject, RowBounds rowBounds, BoundSql boundSql) {
         if (closed) {
             throw new ExecutorException("Executor was closed.");
         }
-        CacheKey cacheKey = new CacheKey();
+        final CacheKey cacheKey = new CacheKey();
+
         cacheKey.update(ms.getId());
         cacheKey.update(rowBounds.getOffset());
         cacheKey.update(rowBounds.getLimit());
         cacheKey.update(boundSql.getSql());
-        List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
-        TypeHandlerRegistry typeHandlerRegistry = ms.getConfiguration().getTypeHandlerRegistry();
+
+        final List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+        final TypeHandlerRegistry typeHandlerRegistry = ms.getConfiguration().getTypeHandlerRegistry();
         // mimic DefaultParameterHandler logic
         for (ParameterMapping parameterMapping : parameterMappings) {
             if (parameterMapping.getMode() != ParameterMode.OUT) {

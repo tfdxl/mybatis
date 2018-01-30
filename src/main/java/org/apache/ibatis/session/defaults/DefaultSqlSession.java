@@ -73,7 +73,7 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public <T> T selectOne(String statement, Object parameter) {
 
-        List<T> list = this.selectList(statement, parameter);
+        final List<T> list = this.selectList(statement, parameter);
         if (list.size() == 1) {
             return list.get(0);
         } else if (list.size() > 1) {
@@ -119,8 +119,8 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public <T> Cursor<T> selectCursor(String statement, Object parameter, RowBounds rowBounds) {
         try {
-            MappedStatement ms = configuration.getMappedStatement(statement);
-            Cursor<T> cursor = executor.queryCursor(ms, wrapCollection(parameter), rowBounds);
+            final MappedStatement ms = configuration.getMappedStatement(statement);
+            final Cursor<T> cursor = executor.queryCursor(ms, wrapCollection(parameter), rowBounds);
             registerCursor(cursor);
             return cursor;
         } catch (Exception e) {
@@ -143,7 +143,7 @@ public class DefaultSqlSession implements SqlSession {
     @Override
     public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds) {
         try {
-            MappedStatement ms = configuration.getMappedStatement(statement);
+            final MappedStatement ms = configuration.getMappedStatement(statement);
             return executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
         } catch (Exception e) {
             throw ExceptionFactory.wrapException("Error querying database.  Cause: " + e, e);
@@ -318,6 +318,12 @@ public class DefaultSqlSession implements SqlSession {
         return (!autoCommit && dirty) || force;
     }
 
+    /**
+     * 包装集合
+     *
+     * @param object
+     * @return
+     */
     private Object wrapCollection(final Object object) {
         if (object instanceof Collection) {
             final StrictMap<Object> map = new StrictMap<>();
@@ -334,12 +340,17 @@ public class DefaultSqlSession implements SqlSession {
         return object;
     }
 
+    /**
+     * 严格map
+     *
+     * @param <V>
+     */
     public static class StrictMap<V> extends HashMap<String, V> {
 
         private static final long serialVersionUID = -5741767162221585340L;
 
         /**
-         * 没有抛异常
+         * 没有就抛出抛异常
          *
          * @param key
          * @return
