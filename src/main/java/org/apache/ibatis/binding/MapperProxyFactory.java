@@ -49,6 +49,12 @@ public class MapperProxyFactory<T> {
         return methodCache;
     }
 
+    /**
+     * 创建动态代理对象
+     *
+     * @param mapperProxy
+     * @return
+     */
     protected T newInstance(MapperProxy<T> mapperProxy) {
         return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[]{mapperInterface}, mapperProxy);
     }
