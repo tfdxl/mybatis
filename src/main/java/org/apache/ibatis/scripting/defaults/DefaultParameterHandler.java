@@ -36,7 +36,7 @@ import java.util.List;
  * @author Clinton Begin
  * @author Eduardo Macarron
  */
-public class DefaultParameterHandler implements ParameterHandler {
+public final class DefaultParameterHandler implements ParameterHandler {
 
     private final TypeHandlerRegistry typeHandlerRegistry;
     private final MappedStatement mappedStatement;
@@ -60,7 +60,7 @@ public class DefaultParameterHandler implements ParameterHandler {
     @Override
     public void setParameters(PreparedStatement ps) {
         ErrorContext.instance().activity("setting parameters").object(mappedStatement.getParameterMap().getId());
-        List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
+        final List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
         if (parameterMappings != null) {
             for (int i = 0; i < parameterMappings.size(); i++) {
                 ParameterMapping parameterMapping = parameterMappings.get(i);

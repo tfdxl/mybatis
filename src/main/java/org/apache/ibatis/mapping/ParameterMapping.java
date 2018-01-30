@@ -23,18 +23,50 @@ import org.apache.ibatis.type.TypeHandlerRegistry;
 import java.sql.ResultSet;
 
 /**
+ * 参数的映射
+ *
  * @author Clinton Begin
  */
 public class ParameterMapping {
 
+    /**
+     * 配置
+     */
     private Configuration configuration;
 
+    /**
+     * 属性
+     */
     private String property;
+
+    /**
+     * 参数的类型
+     */
     private ParameterMode mode;
+
+    /**
+     * Java的类型
+     */
     private Class<?> javaType = Object.class;
+
+    /**
+     * jdbc的类型
+     */
     private JdbcType jdbcType;
+
+    /**
+     * 数字的精度
+     */
     private Integer numericScale;
+
+    /**
+     * 类型处理器
+     */
     private TypeHandler<?> typeHandler;
+
+    /**
+     * 结果集映射的ID
+     */
     private String resultMapId;
     private String jdbcTypeName;
     private String expression;
@@ -124,8 +156,8 @@ public class ParameterMapping {
 
         private void resolveTypeHandler() {
             if (parameterMapping.typeHandler == null && parameterMapping.javaType != null) {
-                Configuration configuration = parameterMapping.configuration;
-                TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+                final Configuration configuration = parameterMapping.configuration;
+                final TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
                 parameterMapping.typeHandler = typeHandlerRegistry.getTypeHandler(parameterMapping.javaType, parameterMapping.jdbcType);
             }
         }
