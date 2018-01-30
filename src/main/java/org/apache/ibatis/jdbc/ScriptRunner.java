@@ -220,7 +220,6 @@ public class ScriptRunner {
     }
 
     private boolean commandReadyToExecute(String trimmedLine) {
-        // issue #561 remove anything after the delimiter
         return !fullLineDelimiter && trimmedLine.contains(delimiter) || fullLineDelimiter && trimmedLine.equals(delimiter);
     }
 
@@ -254,7 +253,7 @@ public class ScriptRunner {
         try {
             statement.close();
         } catch (Exception e) {
-            // Ignore to workaround a bug in some connection pools
+
         }
     }
 
