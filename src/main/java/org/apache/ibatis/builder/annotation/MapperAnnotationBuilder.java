@@ -282,9 +282,9 @@ public class MapperAnnotationBuilder {
     }
 
     void parseStatement(Method method) {
-        Class<?> parameterTypeClass = getParameterType(method);
-        LanguageDriver languageDriver = getLanguageDriver(method);
-        SqlSource sqlSource = getSqlSourceFromAnnotations(method, parameterTypeClass, languageDriver);
+        final Class<?> parameterTypeClass = getParameterType(method);
+        final LanguageDriver languageDriver = getLanguageDriver(method);
+        final SqlSource sqlSource = getSqlSourceFromAnnotations(method, parameterTypeClass, languageDriver);
         if (sqlSource != null) {
             Options options = method.getAnnotation(Options.class);
             final String mappedStatementId = type.getName() + "." + method.getName();

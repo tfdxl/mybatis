@@ -218,7 +218,10 @@ public class MapperMethod {
         private final SqlCommandType type;
 
         public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
+
+            //方法的名字
             final String methodName = method.getName();
+            //方法声明的类
             final Class<?> declaringClass = method.getDeclaringClass();
             final MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass,
                     configuration);
@@ -249,7 +252,9 @@ public class MapperMethod {
 
         private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
                                                        Class<?> declaringClass, Configuration configuration) {
-            String statementId = mapperInterface.getName() + "." + methodName;
+
+            //statementId=interfaceName.methodName
+            final String statementId = mapperInterface.getName() + "." + methodName;
             if (configuration.hasStatement(statementId)) {
                 return configuration.getMappedStatement(statementId);
             } else if (mapperInterface.equals(declaringClass)) {
