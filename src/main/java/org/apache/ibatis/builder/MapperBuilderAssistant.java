@@ -160,7 +160,6 @@ public class MapperBuilderAssistant extends BaseBuilder {
             Integer numericScale) {
         resultMap = applyCurrentNamespace(resultMap, true);
 
-        // Class parameterType = parameterMapBuilder.type();
         Class<?> javaTypeClass = resolveParameterJavaType(parameterType, property, javaType, jdbcType);
         TypeHandler<?> typeHandlerInstance = resolveTypeHandler(javaTypeClass, typeHandler);
 
@@ -451,26 +450,6 @@ public class MapperBuilderAssistant extends BaseBuilder {
             javaType = Object.class;
         }
         return javaType;
-    }
-
-    /**
-     * Backward compatibility signature
-     */
-    public ResultMapping buildResultMapping(
-            Class<?> resultType,
-            String property,
-            String column,
-            Class<?> javaType,
-            JdbcType jdbcType,
-            String nestedSelect,
-            String nestedResultMap,
-            String notNullColumn,
-            String columnPrefix,
-            Class<? extends TypeHandler<?>> typeHandler,
-            List<ResultFlag> flags) {
-        return buildResultMapping(
-                resultType, property, column, javaType, jdbcType, nestedSelect,
-                nestedResultMap, notNullColumn, columnPrefix, typeHandler, flags, null, null, configuration.isLazyLoadingEnabled());
     }
 
     public LanguageDriver getLanguageDriver(Class<?> langClass) {
