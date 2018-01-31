@@ -24,11 +24,7 @@ import org.apache.ibatis.mapping.MappedStatement;
 import org.apache.ibatis.session.ResultHandler;
 import org.apache.ibatis.session.RowBounds;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.List;
 
 /**
@@ -67,6 +63,8 @@ public class PreparedStatementHandler extends BaseStatementHandler {
         //执行
         final PreparedStatement ps = (PreparedStatement) statement;
         ps.execute();
+
+        //结果集处理
         return resultSetHandler.handleResultSets(ps);
     }
 
