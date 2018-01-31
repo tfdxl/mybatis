@@ -307,6 +307,12 @@ public class DefaultSqlSession implements SqlSession {
         executor.clearLocalCache();
     }
 
+    /**
+     * 添加游标
+     *
+     * @param cursor
+     * @param <T>
+     */
     private <T> void registerCursor(Cursor<T> cursor) {
         if (cursorList == null) {
             cursorList = new ArrayList<>();
