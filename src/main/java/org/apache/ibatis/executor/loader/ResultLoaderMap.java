@@ -149,11 +149,9 @@ public class ResultLoaderMap {
             this.metaResultObject = metaResultObject;
             this.resultLoader = resultLoader;
 
-      /* Save required information only if original object can be serialized. */
+            /* Save required information only if original object can be serialized. */
             if (metaResultObject != null && metaResultObject.getOriginalObject() instanceof Serializable) {
                 final Object mappedStatementParameter = resultLoader.parameterObject;
-
-        /* @todo May the parameter be null? */
                 if (mappedStatementParameter instanceof Serializable) {
                     this.mappedStatement = resultLoader.mappedStatement.getId();
                     this.mappedParameter = (Serializable) mappedStatementParameter;
@@ -172,8 +170,8 @@ public class ResultLoaderMap {
         }
 
         public void load() throws SQLException {
-      /* These field should not be null unless the loadpair was serialized.
-       * Yet in that case this method should not be called. */
+            /* These field should not be null unless the loadpair was serialized.
+             * Yet in that case this method should not be called. */
             if (this.metaResultObject == null) {
                 throw new IllegalArgumentException("metaResultObject is null");
             }
@@ -206,10 +204,10 @@ public class ResultLoaderMap {
                         metaResultObject.getSetterType(this.property), null, null);
             }
 
-      /* We are using a new executor because we may be (and likely are) on a new thread
-       * and executors aren't thread safe. (Is this sufficient?)
-       *
-       * A better approach would be making executors thread safe. */
+            /* We are using a new executor because we may be (and likely are) on a new thread
+             * and executors aren't thread safe. (Is this sufficient?)
+             *
+             * A better approach would be making executors thread safe. */
             if (this.serializationCheck == null) {
                 final ResultLoader old = this.resultLoader;
                 this.resultLoader = new ResultLoader(old.configuration, new ClosedExecutor(), old.mappedStatement,
