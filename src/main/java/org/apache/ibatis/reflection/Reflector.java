@@ -171,7 +171,6 @@ public class Reflector {
                         winner = candidate;
                     }
                 } else if (candidateType.isAssignableFrom(winnerType)) {
-                    // OK getter type is descendant
                 } else if (winnerType.isAssignableFrom(candidateType)) {
                     winner = candidate;
                 } else {

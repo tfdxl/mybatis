@@ -53,27 +53,4 @@ public class ParamNameUtil {
     private ParamNameUtil() {
         super();
     }
-
-    public static void main(String[] args) throws NoSuchMethodException {
-
-        final Class[] paramClasses = {int.class, String.class};
-        final Constructor<User> constructor = User.class.getConstructor(paramClasses);
-        List<String> paramNames = getParameterNames(constructor);
-        int index = 0;
-        for (String name : paramNames) {
-            index++;
-            System.err.println("index " + index + " name: " + name);
-        }
-    }
-
-    public static class User {
-
-        int age;
-        String name;
-
-        public User(int age, String name) {
-            this.age = age;
-            this.name = name;
-        }
-    }
 }
