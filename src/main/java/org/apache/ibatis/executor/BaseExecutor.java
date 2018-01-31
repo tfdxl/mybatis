@@ -162,8 +162,15 @@ public abstract class BaseExecutor implements Executor {
             queryStack++;
             list = resultHandler == null ? (List<E>) localCache.getObject(key) : null;
             if (list != null) {
+
+                /**
+                 * 从本地缓存终查
+                 */
                 handleLocallyCachedOutputParameters(ms, key, parameter, boundSql);
             } else {
+                /**
+                 * 从数据库查询
+                 */
                 list = queryFromDatabase(ms, parameter, rowBounds, resultHandler, key, boundSql);
             }
         } finally {

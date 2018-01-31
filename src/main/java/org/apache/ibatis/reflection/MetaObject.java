@@ -124,12 +124,11 @@ public class MetaObject {
     }
 
     public void setValue(String name, Object value) {
-        PropertyTokenizer prop = new PropertyTokenizer(name);
+        final PropertyTokenizer prop = new PropertyTokenizer(name);
         if (prop.hasNext()) {
             MetaObject metaValue = metaObjectForProperty(prop.getIndexedName());
             if (metaValue == SystemMetaObject.NULL_META_OBJECT) {
                 if (value == null && prop.getChildren() != null) {
-                    // don't instantiate child path if value is null
                     return;
                 } else {
                     metaValue = objectWrapper.instantiatePropertyValue(name, prop, objectFactory);
