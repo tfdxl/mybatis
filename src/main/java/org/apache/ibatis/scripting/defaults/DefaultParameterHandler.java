@@ -67,10 +67,15 @@ public final class DefaultParameterHandler implements ParameterHandler {
         final List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
         if (parameterMappings != null) {
             for (int i = 0; i < parameterMappings.size(); i++) {
-                ParameterMapping parameterMapping = parameterMappings.get(i);
+                final ParameterMapping parameterMapping = parameterMappings.get(i);
+
+                /**
+                 * 只要不是数据库返回的参数都是OK的
+                 */
                 if (parameterMapping.getMode() != ParameterMode.OUT) {
+
                     Object value;
-                    String propertyName = parameterMapping.getProperty();
+                    final String propertyName = parameterMapping.getProperty();
                     if (boundSql.hasAdditionalParameter(propertyName)) {
                         value = boundSql.getAdditionalParameter(propertyName);
                     } else if (parameterObject == null) {

@@ -69,6 +69,12 @@ public class TypeHandlerTest {
         addMapper();
         SqlSession sqlSession = sqlSessionFactory.openSession();
         try {
+            User user0 = sqlSession.selectOne("org.apache.ibatis.submitted.typehandler.Mapper.getUser0", 1);
+
+            assertEquals("User1", user0.getName());
+            assertEquals("Carmel", user0.getCity());
+            assertEquals("IN", user0.getState());
+
             Mapper mapper = sqlSession.getMapper(Mapper.class);
             User user = mapper.getUser(1);
             assertEquals("User1", user.getName());

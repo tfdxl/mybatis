@@ -87,6 +87,10 @@ public abstract class BaseStatementHandler implements StatementHandler {
         Statement statement = null;
         try {
             statement = instantiateStatement(connection);
+
+            /**
+             * 设置事务超时时间
+             */
             setStatementTimeout(statement, transactionTimeout);
             setFetchSize(statement);
             return statement;
@@ -127,6 +131,9 @@ public abstract class BaseStatementHandler implements StatementHandler {
             stmt.setFetchSize(fetchSize);
             return;
         }
+        /**
+         * 获取默认的fetchSize
+         */
         Integer defaultFetchSize = configuration.getDefaultFetchSize();
         if (defaultFetchSize != null) {
             stmt.setFetchSize(defaultFetchSize);
