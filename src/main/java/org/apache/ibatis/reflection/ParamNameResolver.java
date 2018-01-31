@@ -142,24 +142,4 @@ public class ParamNameResolver {
             return param;
         }
     }
-
-    static class Name {
-
-        public void insert(@Param("name") String name) {
-            System.err.println(name);
-        }
-    }
-
-    public static void main(String[] args) throws NoSuchMethodException {
-        final Class[] classes = {String.class};
-        final Method method = Name.class.getMethod("insert", classes);
-        final ParamNameResolver paramNameResolver = new ParamNameResolver(new Configuration(), method);
-        final String[] names = paramNameResolver.getNames();
-        for (final String s : names) {
-            System.err.println(s);
-        }
-
-
-
-    }
 }
