@@ -42,53 +42,53 @@ public class DefaultObjectFactory implements ObjectFactory, Serializable {
         return create(type, null, null);
     }
 
-    @SuppressWarnings("unchecked")
     @Override
     public <T> T create(Class<T> type, List<Class<?>> constructorArgTypes, List<Object> constructorArgs) {
         Class<?> classToCreate = resolveInterface(type);
         return (T) instantiateClass(classToCreate, constructorArgTypes, constructorArgs);
     }
 
-  @Override
-  public void setProperties(Properties properties) {
-    // no props for default
-  }
-
-  private  <T> T instantiateClass(Class<T> type, List<Class<?>> constructorArgTypes, List<Object> constructorArgs) {
-    try {
-      Constructor<T> constructor;
-      if (constructorArgTypes == null || constructorArgs == null) {
-        constructor = type.getDeclaredConstructor();
-        if (!constructor.isAccessible()) {
-          constructor.setAccessible(true);
-        }
-        return constructor.newInstance();
-      }
-      constructor = type.getDeclaredConstructor(constructorArgTypes.toArray(new Class[constructorArgTypes.size()]));
-      if (!constructor.isAccessible()) {
-        constructor.setAccessible(true);
-      }
-      return constructor.newInstance(constructorArgs.toArray(new Object[constructorArgs.size()]));
-    } catch (Exception e) {
-      StringBuilder argTypes = new StringBuilder();
-      if (constructorArgTypes != null && !constructorArgTypes.isEmpty()) {
-        for (Class<?> argType : constructorArgTypes) {
-          argTypes.append(argType.getSimpleName());
-          argTypes.append(",");
-        }
-        argTypes.deleteCharAt(argTypes.length() - 1); // remove trailing ,
-      }
-      StringBuilder argValues = new StringBuilder();
-      if (constructorArgs != null && !constructorArgs.isEmpty()) {
-        for (Object argValue : constructorArgs) {
-          argValues.append(String.valueOf(argValue));
-          argValues.append(",");
-        }
-        argValues.deleteCharAt(argValues.length() - 1); // remove trailing ,
-      }
-      throw new ReflectionException("Error instantiating " + type + " with invalid types (" + argTypes + ") or values (" + argValues + "). Cause: " + e, e);
+    @Override
+    public void setProperties(Properties properties) {
     }
-  }
+
+    private <T> T instantiateClass(Class<T> type, List<Class<?>> constructorArgTypes, List<Object> constructorArgs) {
+        try {
+            Constructor<T> constructor;
+            if (constructorArgTypes == null || constructorArgs == null) {
+                constructor = type.getDeclaredConstructor();
+                if (!constructor.isAccessible()) {
+                    constructor.setAccessible(true);
+                }
+                return constructor.newInstance();
+            }
+            constructor = type.getDeclaredConstructor(constructorArgTypes.toArray(new Class[constructorArgTypes.size()]));
+            if (!constructor.isAccessible()) {
+                constructor.setAccessible(true);
+            }
+            return constructor.newInstance(constructorArgs.toArray(new Object[constructorArgs.size()]));
+        } catch (Exception e) {
+            StringBuilder argTypes = new StringBuilder();
+            if (constructorArgTypes != null && !constructorArgTypes.isEmpty()) {
+                for (Class<?> argType : constructorArgTypes) {
+                    argTypes.append(argType.getSimpleName());
+                    argTypes.append(",");
+                }
+                // remove trailing ,
+                argTypes.deleteCharAt(argTypes.length() - 1);
+            }
+            StringBuilder argValues = new StringBuilder();
+            if (constructorArgs != null && !constructorArgs.isEmpty()) {
+                for (Object argValue : constructorArgs) {
+                    argValues.append(String.valueOf(argValue));
+                    argValues.append(",");
+                }
+                // remove trailing ,
+                argValues.deleteCharAt(argValues.length() - 1);
+            }
+            throw new ReflectionException("Error instantiating " + type + " with invalid types (" + argTypes + ") or values (" + argValues + "). Cause: " + e, e);
+        }
+    }
 
     protected Class<?> resolveInterface(Class<?> type) {
 
