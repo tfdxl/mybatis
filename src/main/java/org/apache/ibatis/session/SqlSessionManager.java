@@ -35,9 +35,7 @@ import java.util.Properties;
 public class SqlSessionManager implements SqlSessionFactory, SqlSession {
 
     private final SqlSessionFactory sqlSessionFactory;
-    /**
-     * 实际上是sqlSssion的代理类
-     */
+
     private final SqlSession sqlSessionProxy;
 
     private final ThreadLocal<SqlSession> localSqlSession = new ThreadLocal<>();
@@ -347,6 +345,9 @@ public class SqlSessionManager implements SqlSessionFactory, SqlSession {
         @Override
         public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
 
+            /**
+             * 获取本地的SqlSession
+             */
             final SqlSession sqlSession = SqlSessionManager.this.localSqlSession.get();
 
             if (sqlSession != null) {
@@ -356,6 +357,10 @@ public class SqlSessionManager implements SqlSessionFactory, SqlSession {
                     throw ExceptionUtil.unwrapThrowable(t);
                 }
             } else {
+
+                /**
+                 * 本地没有直接获取SqlSession
+                 */
                 final SqlSession autoSqlSession = openSession();
                 try {
                     final Object result = method.invoke(autoSqlSession, args);
