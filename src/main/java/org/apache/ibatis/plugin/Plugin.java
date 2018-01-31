@@ -68,7 +68,6 @@ public class Plugin implements InvocationHandler {
 
     private static Map<Class<?>, Set<Method>> getSignatureMap(Interceptor interceptor) {
         Intercepts interceptsAnnotation = interceptor.getClass().getAnnotation(Intercepts.class);
-        // issue #251
         if (interceptsAnnotation == null) {
             throw new PluginException("No @Intercepts annotation was found in interceptor " + interceptor.getClass().getName());
         }
@@ -91,9 +90,9 @@ public class Plugin implements InvocationHandler {
     }
 
     private static Class<?>[] getAllInterfaces(Class<?> type, Map<Class<?>, Set<Method>> signatureMap) {
-        Set<Class<?>> interfaces = new HashSet<Class<?>>();
+        final Set<Class<?>> interfaces = new HashSet<Class<?>>();
         while (type != null) {
-            for (Class<?> c : type.getInterfaces()) {
+            for (final Class<?> c : type.getInterfaces()) {
                 if (signatureMap.containsKey(c)) {
                     interfaces.add(c);
                 }
