@@ -33,7 +33,9 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author Clinton Begin
@@ -298,6 +300,8 @@ public class MapperMethod {
             } else {
                 this.returnType = method.getReturnType();
             }
+
+            //从这个地方鉴别返回的类型
             //返回空
             this.returnsVoid = void.class.equals(this.returnType);
             //返回多个
