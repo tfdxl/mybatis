@@ -55,5 +55,4 @@ public class ByteObjectArrayTypeHandler extends BaseTypeHandler<Byte[]> {
         }
         return returnValue;
     }
-
 }
