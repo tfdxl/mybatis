@@ -17,17 +17,7 @@ package org.apache.ibatis.executor.loader;
 
 import org.apache.ibatis.reflection.factory.ObjectFactory;
 
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.Externalizable;
-import java.io.IOException;
-import java.io.InvalidClassException;
-import java.io.ObjectInput;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutput;
-import java.io.ObjectOutputStream;
-import java.io.ObjectStreamException;
-import java.io.StreamCorruptedException;
+import java.io.*;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -58,7 +48,7 @@ public abstract class AbstractSerialStateHolder implements Externalizable {
             List<Class<?>> constructorArgTypes,
             List<Object> constructorArgs) {
         this.userBean = userBean;
-        this.unloadedProperties = new HashMap<String, ResultLoaderMap.LoadPair>(unloadedProperties);
+        this.unloadedProperties = new HashMap<>(unloadedProperties);
         this.objectFactory = objectFactory;
         this.constructorArgTypes = constructorArgTypes.toArray(new Class<?>[constructorArgTypes.size()]);
         this.constructorArgs = constructorArgs.toArray(new Object[constructorArgs.size()]);
