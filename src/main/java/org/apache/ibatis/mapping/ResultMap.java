@@ -25,12 +25,7 @@ import org.apache.ibatis.session.Configuration;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Locale;
-import java.util.Set;
+import java.util.*;
 
 /**
  * @author Clinton Begin
@@ -44,11 +39,23 @@ public class ResultMap {
     private List<ResultMapping> idResultMappings;
     private List<ResultMapping> constructorResultMappings;
     private List<ResultMapping> propertyResultMappings;
+
+    /**
+     * 映射的数据库的列
+     */
     private Set<String> mappedColumns;
+
+    /**
+     * 映射的java pojo的属性
+     */
     private Set<String> mappedProperties;
     private Discriminator discriminator;
     private boolean hasNestedResultMaps;
     private boolean hasNestedQueries;
+
+    /**
+     * 自动映射？
+     */
     private Boolean autoMapping;
 
     private ResultMap() {
