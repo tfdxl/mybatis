@@ -209,15 +209,12 @@ public final class TypeHandlerRegistry {
                 handler = jdbcHandlerMap.get(null);
             }
             if (handler == null) {
-                // #591
                 handler = pickSoleHandler(jdbcHandlerMap);
             }
         }
-        // type drives generics here
         return (TypeHandler<T>) handler;
     }
 
-    @SuppressWarnings({"rawtypes", "unchecked"})
     private Map<JdbcType, TypeHandler<?>> getJdbcHandlerMap(Type type) {
         Map<JdbcType, TypeHandler<?>> jdbcHandlerMap = TYPE_HANDLER_MAP.get(type);
         if (NULL_TYPE_HANDLER_MAP.equals(jdbcHandlerMap)) {
@@ -246,10 +243,8 @@ public final class TypeHandlerRegistry {
                 jdbcHandlerMap = getJdbcHandlerMapForEnumInterfaces(iface, enumClazz);
             }
             if (jdbcHandlerMap != null) {
-                // Found a type handler regsiterd to a super interface
                 HashMap<JdbcType, TypeHandler<?>> newMap = new HashMap<JdbcType, TypeHandler<?>>();
                 for (Entry<JdbcType, TypeHandler<?>> entry : jdbcHandlerMap.entrySet()) {
-                    // Create a type handler instance with enum type as a constructor arg
                     newMap.put(entry.getKey(), getInstance(enumClazz, entry.getValue().getClass()));
                 }
                 return newMap;

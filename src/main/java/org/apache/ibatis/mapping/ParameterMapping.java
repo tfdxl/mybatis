@@ -139,12 +139,20 @@ public class ParameterMapping {
         }
 
         private void validate() {
+
+            /**
+             * 类型是结果集，但是没有结果集mapId就报错
+             */
             if (ResultSet.class.equals(parameterMapping.javaType)) {
                 if (parameterMapping.resultMapId == null) {
-                    throw new IllegalStateException("Missing resultmap in property '"
+                    throw new IllegalStateException("Missing result map in property '"
                             + parameterMapping.property + "'.  "
                             + "Parameters of type java.sql.ResultSet require a resultmap.");
                 }
+
+                /**
+                 * 类型不是结果集但是没有类型的处理器也会报错
+                 */
             } else {
                 if (parameterMapping.typeHandler == null) {
                     throw new IllegalStateException("Type handler was null on parameter mapping for property '"
@@ -158,6 +166,10 @@ public class ParameterMapping {
             if (parameterMapping.typeHandler == null && parameterMapping.javaType != null) {
                 final Configuration configuration = parameterMapping.configuration;
                 final TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+
+                /**
+                 * 获取结果集合处理器
+                 */
                 parameterMapping.typeHandler = typeHandlerRegistry.getTypeHandler(parameterMapping.javaType, parameterMapping.jdbcType);
             }
         }
