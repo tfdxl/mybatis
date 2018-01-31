@@ -16,12 +16,12 @@
 package org.apache.ibatis.reflection.invoker;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 
 /**
  * @author Clinton Begin
  */
 public class GetFieldInvoker implements Invoker {
+
     private final Field field;
 
     public GetFieldInvoker(Field field) {
@@ -29,7 +29,7 @@ public class GetFieldInvoker implements Invoker {
     }
 
     @Override
-    public Object invoke(Object target, Object[] args) throws IllegalAccessException, InvocationTargetException {
+    public Object invoke(Object target, Object[] args) throws IllegalAccessException {
         return field.get(target);
     }
 

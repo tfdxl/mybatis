@@ -57,6 +57,7 @@ public class PropertyParser {
     }
 
     private static class VariableTokenHandler implements TokenHandler {
+
         private final Properties variables;
         private final boolean enableDefaultValue;
         private final String defaultValueSeparator;
@@ -93,5 +94,4 @@ public class PropertyParser {
             return "${" + content + "}";
         }
     }
-
 }
