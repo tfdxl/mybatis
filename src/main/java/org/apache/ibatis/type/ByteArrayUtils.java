@@ -46,12 +46,4 @@ class ByteArrayUtils {
         }
         return objects;
     }
-
-    public static void main(String[] args) {
-        Byte[] o = {34, 45};
-        final byte[] bytes = convertToPrimitiveArray(o);
-        for (byte b : bytes) {
-            System.err.println(b);
-        }
-    }
 }
