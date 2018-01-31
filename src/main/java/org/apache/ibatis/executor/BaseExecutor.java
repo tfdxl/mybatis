@@ -180,10 +180,8 @@ public abstract class BaseExecutor implements Executor {
             for (DeferredLoad deferredLoad : deferredLoads) {
                 deferredLoad.load();
             }
-            // issue #601
             deferredLoads.clear();
             if (configuration.getLocalCacheScope() == LocalCacheScope.STATEMENT) {
-                // issue #482
                 clearLocalCache();
             }
         }
@@ -251,7 +249,6 @@ public abstract class BaseExecutor implements Executor {
             }
         }
         if (configuration.getEnvironment() != null) {
-            // issue #176
             cacheKey.update(configuration.getEnvironment().getId());
         }
         return cacheKey;
