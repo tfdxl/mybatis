@@ -90,7 +90,7 @@ public class Plugin implements InvocationHandler {
     }
 
     private static Class<?>[] getAllInterfaces(Class<?> type, Map<Class<?>, Set<Method>> signatureMap) {
-        final Set<Class<?>> interfaces = new HashSet<Class<?>>();
+        final Set<Class<?>> interfaces = new HashSet<>();
         while (type != null) {
             for (final Class<?> c : type.getInterfaces()) {
                 if (signatureMap.containsKey(c)) {
