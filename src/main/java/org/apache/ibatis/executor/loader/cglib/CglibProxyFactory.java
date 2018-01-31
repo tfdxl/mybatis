@@ -65,10 +65,28 @@ public class CglibProxyFactory implements ProxyFactory {
     public void setProperties(Properties properties) {
     }
 
+    /**
+     * 创建type的代理类
+     *
+     * @param type
+     * @param callback
+     * @param constructorArgTypes
+     * @param constructorArgs
+     * @return
+     */
     static Object crateProxy(Class<?> type, Callback callback, List<Class<?>> constructorArgTypes, List<Object> constructorArgs) {
-        Enhancer enhancer = new Enhancer();
+
+        final Enhancer enhancer = new Enhancer();
         enhancer.setCallback(callback);
+
+        /**
+         * 强势继承type
+         */
         enhancer.setSuperclass(type);
+
+        /**
+         * 如果没有声明writeReplace方法，那么强势实现WriteReplaceInterface
+         */
         try {
             type.getDeclaredMethod(WRITE_REPLACE_METHOD);
             if (log.isDebugEnabled()) {
@@ -78,10 +96,15 @@ public class CglibProxyFactory implements ProxyFactory {
             enhancer.setInterfaces(new Class[]{WriteReplaceInterface.class});
         } catch (SecurityException e) {
         }
+
+
+        //代理对象
         Object enhanced;
         if (constructorArgTypes.isEmpty()) {
+            //无参数
             enhanced = enhancer.create();
         } else {
+            //有参数
             Class<?>[] typesArray = constructorArgTypes.toArray(new Class[constructorArgTypes.size()]);
             Object[] valuesArray = constructorArgs.toArray(new Object[constructorArgs.size()]);
             enhanced = enhancer.create(typesArray, valuesArray);
