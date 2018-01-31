@@ -28,6 +28,8 @@ import java.sql.SQLException;
 import java.util.List;
 
 /**
+ * 二级包工头
+ *
  * @author Clinton Begin
  */
 public interface Executor {

@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 和mybatis交互的主接口
+ * 和mybatis交互的主接口,一级包工头
  * The primary Java interface for working with MyBatis.
  * Through this interface you can execute commands, get mappers and manage transactions.
  *
