@@ -30,10 +30,15 @@ import java.sql.Statement;
 import java.util.List;
 
 /**
+ * 委托设计模式
+ *
  * @author Clinton Begin
  */
 public class RoutingStatementHandler implements StatementHandler {
 
+    /**
+     * 委托给具体的StatementHandler进行处理，具体有简单的，带预编译的以及调用存储过程的
+     */
     private final StatementHandler delegate;
 
     /**
