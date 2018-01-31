@@ -242,7 +242,7 @@ public abstract class BaseExecutor implements Executor {
                 } else if (typeHandlerRegistry.hasTypeHandler(parameterObject.getClass())) {
                     value = parameterObject;
                 } else {
-                    MetaObject metaObject = configuration.newMetaObject(parameterObject);
+                    final MetaObject metaObject = configuration.newMetaObject(parameterObject);
                     value = metaObject.getValue(propertyName);
                 }
                 cacheKey.update(value);
