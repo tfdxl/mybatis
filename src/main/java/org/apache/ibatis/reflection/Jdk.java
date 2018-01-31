@@ -57,10 +57,4 @@ public class Jdk {
     private Jdk() {
         super();
     }
-
-    public static void main(String[] args) {
-        Class clazz = Jdk.class;
-        System.err.println("parameterExists " + parameterExists);
-        System.err.println("dateAndTimeApiExists " + dateAndTimeApiExists);
-    }
 }
