@@ -19,11 +19,7 @@ import net.sf.cglib.proxy.Callback;
 import net.sf.cglib.proxy.Enhancer;
 import net.sf.cglib.proxy.MethodInterceptor;
 import net.sf.cglib.proxy.MethodProxy;
-import org.apache.ibatis.executor.loader.AbstractEnhancedDeserializationProxy;
-import org.apache.ibatis.executor.loader.AbstractSerialStateHolder;
-import org.apache.ibatis.executor.loader.ProxyFactory;
-import org.apache.ibatis.executor.loader.ResultLoaderMap;
-import org.apache.ibatis.executor.loader.WriteReplaceInterface;
+import org.apache.ibatis.executor.loader.*;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.logging.Log;
 import org.apache.ibatis.logging.LogFactory;
@@ -67,7 +63,6 @@ public class CglibProxyFactory implements ProxyFactory {
 
     @Override
     public void setProperties(Properties properties) {
-        // Not Implemented
     }
 
     static Object crateProxy(Class<?> type, Callback callback, List<Class<?>> constructorArgTypes, List<Object> constructorArgs) {
