@@ -365,6 +365,8 @@ public class XMLConfigBuilder extends BaseBuilder {
     private void mapperElement(XNode parent) throws Exception {
         if (parent != null) {
             for (XNode child : parent.getChildren()) {
+
+                //可以直接把包下面的mapper都注册
                 if ("package".equals(child.getName())) {
                     final String mapperPackage = child.getStringAttribute("name");
                     configuration.addMappers(mapperPackage);
