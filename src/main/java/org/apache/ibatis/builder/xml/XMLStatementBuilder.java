@@ -78,6 +78,7 @@ public class XMLStatementBuilder extends BaseBuilder {
         ResultSetType resultSetTypeEnum = resolveResultSetType(resultSetType);
 
         String nodeName = context.getNode().getNodeName();
+        //sql 的类型 select insert update delete
         SqlCommandType sqlCommandType = SqlCommandType.valueOf(nodeName.toUpperCase(Locale.ENGLISH));
         boolean isSelect = sqlCommandType == SqlCommandType.SELECT;
         boolean flushCache = context.getBooleanAttribute("flushCache", !isSelect);
