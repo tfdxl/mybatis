@@ -32,7 +32,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 /**
- * SqlSessionFacatory默认实现
+ * SqlSessionFactory默认实现
  *
  * @author Clinton Begin
  */
