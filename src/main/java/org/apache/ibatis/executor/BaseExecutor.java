@@ -384,6 +384,8 @@ public abstract class BaseExecutor implements Executor {
         } finally {
             localCache.removeObject(key);
         }
+
+        //放入缓存
         localCache.putObject(key, list);
         if (ms.getStatementType() == StatementType.CALLABLE) {
             localOutputParameterCache.putObject(key, parameter);
