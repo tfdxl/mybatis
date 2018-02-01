@@ -117,7 +117,7 @@ public class XMLMapperBuilder extends BaseBuilder {
             builderAssistant.setCurrentNamespace(namespace);
             cacheRefElement(context.evalNode("cache-ref"));
 
-            //是否开启缓存
+            //缓存相关配置
             cacheElement(context.evalNode("cache"));
 
             //解析参数映射
