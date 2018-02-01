@@ -116,9 +116,17 @@ public class XMLMapperBuilder extends BaseBuilder {
             }
             builderAssistant.setCurrentNamespace(namespace);
             cacheRefElement(context.evalNode("cache-ref"));
+
+            //是否开启缓存
             cacheElement(context.evalNode("cache"));
+
+            //解析参数映射
             parameterMapElement(context.evalNodes("/mapper/parameterMap"));
+
+            //解析结果集映射
             resultMapElements(context.evalNodes("/mapper/resultMap"));
+
+            //解析sql节点
             sqlElement(context.evalNodes("/mapper/sql"));
             buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
         } catch (Exception e) {
@@ -153,7 +161,6 @@ public class XMLMapperBuilder extends BaseBuilder {
                     iter.next().resolve();
                     iter.remove();
                 } catch (IncompleteElementException e) {
-                    // ResultMap is still missing a resource...
                 }
             }
         }

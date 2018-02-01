@@ -139,8 +139,6 @@ public class XMLStatementBuilder extends BaseBuilder {
         String keyProperty = nodeToHandle.getStringAttribute("keyProperty");
         String keyColumn = nodeToHandle.getStringAttribute("keyColumn");
         boolean executeBefore = "BEFORE".equals(nodeToHandle.getStringAttribute("order", "AFTER"));
-
-        //defaults
         boolean useCache = false;
         boolean resultOrdered = false;
         KeyGenerator keyGenerator = NoKeyGenerator.INSTANCE;
@@ -180,7 +178,6 @@ public class XMLStatementBuilder extends BaseBuilder {
             if (databaseId != null) {
                 return false;
             }
-            // skip this statement if there is a previous one with a not null databaseId
             id = builderAssistant.applyCurrentNamespace(id, false);
             if (this.configuration.hasStatement(id, false)) {
                 MappedStatement previous = this.configuration.getMappedStatement(id, false); // issue #2
