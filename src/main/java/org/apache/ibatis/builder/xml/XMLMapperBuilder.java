@@ -94,7 +94,10 @@ public class XMLMapperBuilder extends BaseBuilder {
             bindMapperForNamespace();
         }
 
+        //解析所有的结果集映射
         parsePendingResultMaps();
+
+        //解析所有的缓存映射
         parsePendingCacheRefs();
 
         //解析所有的statement
@@ -376,7 +379,6 @@ public class XMLMapperBuilder extends BaseBuilder {
         String foreignColumn = context.getStringAttribute("foreignColumn");
         boolean lazy = "lazy".equals(context.getStringAttribute("fetchType", configuration.isLazyLoadingEnabled() ? "lazy" : "eager"));
         Class<?> javaTypeClass = resolveClass(javaType);
-        @SuppressWarnings("unchecked")
         Class<? extends TypeHandler<?>> typeHandlerClass = (Class<? extends TypeHandler<?>>) resolveClass(typeHandler);
         JdbcType jdbcTypeEnum = resolveJdbcType(jdbcType);
         return builderAssistant.buildResultMapping(resultType, property, column, javaTypeClass, jdbcTypeEnum, nestedSelect, nestedResultMap, notNullColumn, columnPrefix, typeHandlerClass, flags, resultSet, foreignColumn, lazy);
