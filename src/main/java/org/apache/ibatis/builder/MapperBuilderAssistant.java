@@ -335,7 +335,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
             String statementId) {
         resultMap = applyCurrentNamespace(resultMap, true);
 
-        List<ResultMap> resultMaps = new ArrayList<ResultMap>();
+        List<ResultMap> resultMaps = new ArrayList<>();
         if (resultMap != null) {
             String[] resultMapNames = resultMap.split(",");
             for (String resultMapName : resultMapNames) {
@@ -350,7 +350,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
                     configuration,
                     statementId + "-Inline",
                     resultType,
-                    new ArrayList<ResultMapping>(),
+                    new ArrayList<>(),
                     null).build();
             resultMaps.add(inlineResultMap);
         }
@@ -381,7 +381,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
                 .nestedResultMapId(applyCurrentNamespace(nestedResultMap, true))
                 .resultSet(resultSet)
                 .typeHandler(typeHandlerInstance)
-                .flags(flags == null ? new ArrayList<ResultFlag>() : flags)
+                .flags(flags == null ? new ArrayList<>() : flags)
                 .composites(composites)
                 .notNullColumns(parseMultipleColumnNames(notNullColumn))
                 .columnPrefix(columnPrefix)
