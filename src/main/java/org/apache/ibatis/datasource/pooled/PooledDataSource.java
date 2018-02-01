@@ -171,7 +171,7 @@ public class PooledDataSource implements DataSource {
 
     /*
      * The maximum number of tolerance for bad connection happens in one thread
-      * which are applying for new {@link PooledConnection}
+     * which are applying for new {@link PooledConnection}
      *
      * @param poolMaximumLocalBadConnectionTolerance
      * max tolerance for bad connection happens in one thread
