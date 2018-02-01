@@ -96,6 +96,8 @@ public class XMLMapperBuilder extends BaseBuilder {
 
         parsePendingResultMaps();
         parsePendingCacheRefs();
+
+        //解析所有的statement
         parsePendingStatements();
     }
 
