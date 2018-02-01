@@ -258,7 +258,7 @@ public class XMLMapperBuilder extends BaseBuilder {
     }
 
     private ResultMap resultMapElement(XNode resultMapNode) throws Exception {
-        return resultMapElement(resultMapNode, Collections.<ResultMapping>emptyList());
+        return resultMapElement(resultMapNode, Collections.emptyList());
     }
 
     private ResultMap resultMapElement(XNode resultMapNode, List<ResultMapping> additionalResultMappings) throws Exception {
@@ -328,14 +328,14 @@ public class XMLMapperBuilder extends BaseBuilder {
         return builderAssistant.buildDiscriminator(resultType, column, javaTypeClass, jdbcTypeEnum, typeHandlerClass, discriminatorMap);
     }
 
-    private void sqlElement(List<XNode> list) throws Exception {
+    private void sqlElement(List<XNode> list) {
         if (configuration.getDatabaseId() != null) {
             sqlElement(list, configuration.getDatabaseId());
         }
         sqlElement(list, null);
     }
 
-    private void sqlElement(List<XNode> list, String requiredDatabaseId) throws Exception {
+    private void sqlElement(List<XNode> list, String requiredDatabaseId) {
         for (XNode context : list) {
             String databaseId = context.getStringAttribute("databaseId");
             String id = context.getStringAttribute("id");
@@ -348,9 +348,7 @@ public class XMLMapperBuilder extends BaseBuilder {
 
     private boolean databaseIdMatchesCurrent(String id, String databaseId, String requiredDatabaseId) {
         if (requiredDatabaseId != null) {
-            if (!requiredDatabaseId.equals(databaseId)) {
-                return false;
-            }
+            return requiredDatabaseId.equals(databaseId);
         } else {
             if (databaseId != null) {
                 return false;
@@ -358,9 +356,7 @@ public class XMLMapperBuilder extends BaseBuilder {
             // skip this fragment if there is a previous one with a not null databaseId
             if (this.sqlFragments.containsKey(id)) {
                 XNode context = this.sqlFragments.get(id);
-                if (context.getStringAttribute("databaseId") != null) {
-                    return false;
-                }
+                return context.getStringAttribute("databaseId") == null;
             }
         }
         return true;
@@ -378,7 +374,7 @@ public class XMLMapperBuilder extends BaseBuilder {
         String jdbcType = context.getStringAttribute("jdbcType");
         String nestedSelect = context.getStringAttribute("select");
         String nestedResultMap = context.getStringAttribute("resultMap",
-                processNestedResultMappings(context, Collections.<ResultMapping>emptyList()));
+                processNestedResultMappings(context, Collections.emptyList()));
         String notNullColumn = context.getStringAttribute("notNullColumn");
         String columnPrefix = context.getStringAttribute("columnPrefix");
         String typeHandler = context.getStringAttribute("typeHandler");
