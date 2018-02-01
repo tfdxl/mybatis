@@ -120,7 +120,7 @@ public class MapperAnnotationBuilder {
     }
 
     public void parse() {
-        String resource = type.toString();
+        final String resource = type.toString();
         if (!configuration.isResourceLoaded(resource)) {
 
             //现加载xml文件终的mapper
@@ -144,7 +144,7 @@ public class MapperAnnotationBuilder {
     }
 
     private void parsePendingMethods() {
-        Collection<MethodResolver> incompleteMethods = configuration.getIncompleteMethods();
+        final Collection<MethodResolver> incompleteMethods = configuration.getIncompleteMethods();
         synchronized (incompleteMethods) {
             Iterator<MethodResolver> iter = incompleteMethods.iterator();
             while (iter.hasNext()) {
