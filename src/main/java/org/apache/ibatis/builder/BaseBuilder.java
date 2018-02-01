@@ -114,7 +114,7 @@ public abstract class BaseBuilder {
             return null;
         }
         try {
-            //从匿名表中查找
+            //从别名表中查找
             return resolveAlias(alias);
         } catch (Exception e) {
             throw new BuilderException("Error resolving class. Cause: " + e, e);
