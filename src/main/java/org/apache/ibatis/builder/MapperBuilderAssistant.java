@@ -236,7 +236,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
                 null,
                 null,
                 false);
-        Map<String, String> namespaceDiscriminatorMap = new HashMap<String, String>();
+        Map<String, String> namespaceDiscriminatorMap = new HashMap<>();
         for (Map.Entry<String, String> e : discriminatorMap.entrySet()) {
             String resultMap = e.getValue();
             resultMap = applyCurrentNamespace(resultMap, true);
