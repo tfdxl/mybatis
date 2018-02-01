@@ -298,7 +298,6 @@ public class XMLConfigBuilder extends BaseBuilder {
         DatabaseIdProvider databaseIdProvider = null;
         if (context != null) {
             String type = context.getStringAttribute("type");
-            // 烂补丁保持向后兼容
             if ("VENDOR".equals(type)) {
                 type = "DB_VENDOR";
             }
