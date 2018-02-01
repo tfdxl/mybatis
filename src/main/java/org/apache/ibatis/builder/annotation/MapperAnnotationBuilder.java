@@ -129,6 +129,8 @@ public class MapperAnnotationBuilder {
             assistant.setCurrentNamespace(type.getName());
             parseCache();
             parseCacheRef();
+
+            //遍历mapper终的方法，根据注解parse成mappedStatement
             Method[] methods = type.getMethods();
             for (Method method : methods) {
                 try {
@@ -162,6 +164,8 @@ public class MapperAnnotationBuilder {
         // to prevent loading again a resource twice
         // this flag is set at XMLMapperBuilder#bindMapperForNamespace
         if (!configuration.isResourceLoaded("namespace:" + type.getName())) {
+
+            //将mapper转成xml文件进行解析
             String xmlResource = type.getName().replace('.', '/') + ".xml";
             InputStream inputStream = null;
             try {
