@@ -1,17 +1,17 @@
 /**
- *    Copyright 2009-2018 the original author or authors.
- *
- *    Licensed under the Apache License, Version 2.0 (the "License");
- *    you may not use this file except in compliance with the License.
- *    You may obtain a copy of the License at
- *
- *       http://www.apache.org/licenses/LICENSE-2.0
- *
- *    Unless required by applicable law or agreed to in writing, software
- *    distributed under the License is distributed on an "AS IS" BASIS,
- *    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *    See the License for the specific language governing permissions and
- *    limitations under the License.
+ * Copyright 2009-2018 the original author or authors.
+ * <p>
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ * <p>
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * <p>
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package org.apache.ibatis.session;
 
@@ -88,10 +88,12 @@ public class Configuration {
      * 安全的行数限制
      */
     protected boolean safeRowBoundsEnabled;
+
     /**
      * 安全的结果集处理
      */
     protected boolean safeResultHandlerEnabled = true;
+
     /**
      * 下划线映射到驼峰
      */
@@ -131,7 +133,9 @@ public class Configuration {
     protected boolean returnInstanceForEmptyRow;
 
     protected String logPrefix;
+
     protected Class<? extends Log> logImpl;
+
     protected Class<? extends VFS> vfsImpl;
 
     /**
@@ -933,6 +937,7 @@ public class Configuration {
     protected static class StrictMap<V> extends HashMap<String, V> {
 
         private static final long serialVersionUID = -4950446264854982944L;
+
         private final String name;
 
         public StrictMap(String name, int initialCapacity, float loadFactor) {
@@ -955,12 +960,20 @@ public class Configuration {
             this.name = name;
         }
 
+        /**
+         * 如果包含了要设置的key那么直接报错
+         *
+         * @param key
+         * @param value
+         * @return
+         */
         @SuppressWarnings("unchecked")
         @Override
         public V put(String key, V value) {
             if (containsKey(key)) {
                 throw new IllegalArgumentException(name + " already contains value for " + key);
             }
+
             if (key.contains(".")) {
                 final String shortKey = getShortName(key);
                 if (super.get(shortKey) == null) {
