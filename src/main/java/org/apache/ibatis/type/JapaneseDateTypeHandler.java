@@ -17,11 +17,7 @@ package org.apache.ibatis.type;
 
 import org.apache.ibatis.lang.UsesJava8;
 
-import java.sql.CallableStatement;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.chrono.JapaneseDate;
 
