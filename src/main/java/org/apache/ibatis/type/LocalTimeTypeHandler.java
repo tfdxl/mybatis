@@ -1,5 +1,5 @@
 /**
- * Copyright 2009-2017 the original author or authors.
+ * Copyright 2009-2018 the original author or authors.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,11 +17,7 @@ package org.apache.ibatis.type;
 
 import org.apache.ibatis.lang.UsesJava8;
 
-import java.sql.CallableStatement;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Time;
+import java.sql.*;
 import java.time.LocalTime;
 
 /**
@@ -39,6 +35,7 @@ public class LocalTimeTypeHandler extends BaseTypeHandler<LocalTime> {
 
     @Override
     public LocalTime getNullableResult(ResultSet rs, String columnName) throws SQLException {
+        //首先他妈的获取time然后转换成为LocalTime
         Time time = rs.getTime(columnName);
         return getLocalTime(time);
     }

@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2017 the original author or authors.
+ *    Copyright 2009-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,17 +15,11 @@
  */
 package org.apache.ibatis.submitted.sptests;
 
+import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.mapping.StatementType;
+
 import java.util.List;
 import java.util.Map;
-
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Result;
-import org.apache.ibatis.annotations.ResultMap;
-import org.apache.ibatis.annotations.Results;
-import org.apache.ibatis.annotations.Select;
-import org.apache.ibatis.annotations.Update;
-import org.apache.ibatis.mapping.StatementType;
 
 public interface SPMapper {
   // XML based

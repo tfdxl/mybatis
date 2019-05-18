@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2017 the original author or authors.
+ *    Copyright 2009-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -14,13 +14,6 @@
  *    limitations under the License.
  */
 package org.apache.ibatis.submitted.usesjava8.multiple_resultsets;
-
-import java.io.IOException;
-import java.io.Reader;
-import java.nio.file.Paths;
-import java.sql.Connection;
-import java.util.Collections;
-import java.util.List;
 
 import org.apache.ibatis.datasource.unpooled.UnpooledDataSource;
 import org.apache.ibatis.io.Resources;
@@ -37,9 +30,15 @@ import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-
 import ru.yandex.qatools.embed.postgresql.EmbeddedPostgres;
 import ru.yandex.qatools.embed.postgresql.util.SocketUtil;
+
+import java.io.IOException;
+import java.io.Reader;
+import java.nio.file.Paths;
+import java.sql.Connection;
+import java.util.Collections;
+import java.util.List;
 
 /*
  * This class contains tests for multiple results.  

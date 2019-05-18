@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2016 the original author or authors.
+ *    Copyright 2009-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,21 +15,12 @@
  */
 package org.apache.ibatis.submitted.custom_collection_handling;
 
-import java.lang.reflect.Array;
-import java.lang.reflect.Constructor;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import org.apache.ibatis.reflection.ReflectionException;
 import org.apache.ibatis.reflection.factory.ObjectFactory;
+
+import java.lang.reflect.Array;
+import java.lang.reflect.Constructor;
+import java.util.*;
 
 public class CustomObjectFactory implements ObjectFactory {
 

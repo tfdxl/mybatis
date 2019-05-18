@@ -1,5 +1,5 @@
 /**
- * Copyright 2009-2017 the original author or authors.
+ * Copyright 2009-2018 the original author or authors.
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -45,6 +45,7 @@ import java.util.Map;
 public class MapperMethod {
 
     private final SqlCommand command;
+
     private final MethodSignature method;
 
     public MapperMethod(Class<?> mapperInterface, Method method, Configuration config) {
@@ -217,16 +218,23 @@ public class MapperMethod {
          * 命令的名字,其实就是statement的ID
          */
         private final String name;
+
+        /**
+         * sql命令的类型
+         */
         private final SqlCommandType type;
 
         public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
 
             //方法的名字
             final String methodName = method.getName();
+
             //方法声明的类
             final Class<?> declaringClass = method.getDeclaringClass();
+
             final MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass,
                     configuration);
+
             if (ms == null) {
                 if (method.getAnnotation(Flush.class) != null) {
                     name = null;
@@ -255,7 +263,6 @@ public class MapperMethod {
         private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
                                                        Class<?> declaringClass, Configuration configuration) {
 
-            //statementId=interfaceName.methodName
             final String statementId = mapperInterface.getName() + "." + methodName;
             if (configuration.hasStatement(statementId)) {
                 return configuration.getMappedStatement(statementId);
@@ -304,12 +311,16 @@ public class MapperMethod {
             //从这个地方鉴别返回的类型
             //返回空
             this.returnsVoid = void.class.equals(this.returnType);
+
             //返回多个
             this.returnsMany = configuration.getObjectFactory().isCollection(this.returnType) || this.returnType.isArray();
+
             //返回的是Cursor对象
             this.returnsCursor = Cursor.class.equals(this.returnType);
+
             //映射的key
             this.mapKey = getMapKey(method);
+
             //返回的是map
             this.returnsMap = this.mapKey != null;
             this.rowBoundsIndex = getUniqueParamIndex(method, RowBounds.class);

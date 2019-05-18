@@ -1,5 +1,5 @@
 /**
- *    Copyright 2009-2017 the original author or authors.
+ *    Copyright 2009-2018 the original author or authors.
  *
  *    Licensed under the Apache License, Version 2.0 (the "License");
  *    you may not use this file except in compliance with the License.
@@ -15,17 +15,19 @@
  */
 package org.apache.ibatis.type.usesjava8;
 
-import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
+import org.apache.ibatis.type.BaseTypeHandlerTest;
+import org.apache.ibatis.type.JapaneseDateTypeHandler;
+import org.apache.ibatis.type.TypeHandler;
+import org.junit.Test;
 
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.chrono.JapaneseDate;
 
-import org.apache.ibatis.type.BaseTypeHandlerTest;
-import org.apache.ibatis.type.JapaneseDateTypeHandler;
-import org.apache.ibatis.type.TypeHandler;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class JapaneseDateTypeHandlerTest extends BaseTypeHandlerTest {
 
