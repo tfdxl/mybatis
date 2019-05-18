@@ -36,6 +36,7 @@ public class BindingException extends PersistenceException {
         super(message, cause);
     }
 
+    
     public BindingException(Throwable cause) {
         super(cause);
     }
